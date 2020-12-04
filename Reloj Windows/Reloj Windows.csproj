@@ -19,10 +19,13 @@ v1.0.0.3 (04-dic-20) Se puede indicar que se ponga en el tamaño más pequeño.<
 v1.0.0.2 (04-dic-20) Comprobación para que la hora se ajuste bien con el alto.
 v1.0.0.1 (03-dic-20) Operativo con todas las características iniciales.
 v1.0.0.0 (02-dic-20) Primeras pruebas de funcionalidad,</PackageReleaseNotes>
-    <NeutralLanguage>zgh</NeutralLanguage>
+    <NeutralLanguage>es-ES</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>(c) Guillermo Som (elGuille), 2020</Copyright>
     <PackageIcon>Reloj Windows (Monitor.WinVista).ico</PackageIcon>
+    <RepositoryUrl>https://github.com/elGuille-info/Reloj-Windows</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>csharp dotnet net net-core c-sharp reloj salva-pantalla mover-sin-caption mover-formulario</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
