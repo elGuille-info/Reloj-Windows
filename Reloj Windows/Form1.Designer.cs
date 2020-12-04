@@ -314,7 +314,7 @@ namespace Reloj_Windows
             this.MinimumSize = new System.Drawing.Size(350, 180);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Reloj Windows";
+            this.Text = "Reloj Windows (C#)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Move += new System.EventHandler(this.Form1_Move);
