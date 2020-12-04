@@ -26,6 +26,7 @@ v1.0.0.0 (02-dic-20) Primeras pruebas de funcionalidad,</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/elGuille-info/Reloj-Windows</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>csharp dotnet net net-core c-sharp reloj salva-pantalla mover-sin-caption mover-formulario</PackageTags>
+    <PackageProjectUrl>http://www.elguillemola.com/utilidades-net/reloj-windows-csharp/</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
