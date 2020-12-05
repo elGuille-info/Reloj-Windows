@@ -5,7 +5,7 @@ Option Strict On
 
 
 Namespace Reloj_Windows
-    Partial Class Form1
+    Partial Class FormReloj
         ''' <summary>
         '''  Required designer variable.
         ''' </summary>
@@ -20,7 +20,8 @@ Namespace Reloj_Windows
             End If
             MyBase.Dispose(disposing)
         End Sub
-#Region "Windows Form Designer generated code"
+
+#Region " Windows Form Designer generated code "
 
         ''' <summary>
         '''  Required method for Designer support - do not modify
@@ -28,7 +29,7 @@ Namespace Reloj_Windows
         ''' </summary>
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+            Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FormReloj))
             Me.panelCentro = New System.Windows.Forms.Panel()
             Me.labelHora = New System.Windows.Forms.Label()
             Me.labelFecha = New System.Windows.Forms.Label()
@@ -196,10 +197,12 @@ Namespace Reloj_Windows
             'mnuSalvapantalla
             '
             Me.mnuSalvapantalla.Name = "mnuSalvapantalla"
+            Me.mnuSalvapantalla.ShortcutKeyDisplayString = "Ctrl+Shift+P"
             Me.mnuSalvapantalla.Size = New System.Drawing.Size(281, 22)
-            Me.mnuSalvapantalla.Text = "Usar como salvapantalla"
+            Me.mnuSalvapantalla.Text = "Iniciar salvapantalla"
             Me.mnuSalvapantalla.ToolTipText = "No sustituye a ningún salvapantalla, " & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "simplemente desplaza la ventana por la pan" &
-    "talla." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Para deterlo haz doble-clic en la fecha o la hora."
+    "talla." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Para detenerlo haz doble-clic en la fecha o la hora." & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Pulsa Ctrl+Shit+P " &
+    "para iniciarlo o detenerlo."
             '
             'mnuOpacidad
             '
@@ -237,6 +240,12 @@ Namespace Reloj_Windows
             Me.mnuCerrar.Size = New System.Drawing.Size(281, 22)
             Me.mnuCerrar.Text = "Cerrar el programa"
             '
+            'timerActualizarFechaHora
+            '
+            '
+            'timerSalvaPantalla
+            '
+            '
             'Form1
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
@@ -257,33 +266,35 @@ Namespace Reloj_Windows
             Me.PerformLayout()
 
         End Sub
+
 #End Region
+
         'private System.Windows.Forms.Panel panelAbajo;
         'private System.Windows.Forms.Label labelInfo;
-        Private panelCentro As Windows.Forms.Panel
-        Private labelHora As Windows.Forms.Label
-        Private labelFecha As Windows.Forms.Label
+        Private WithEvents panelCentro As Windows.Forms.Panel
+        Private WithEvents labelHora As Windows.Forms.Label
+        Private WithEvents labelFecha As Windows.Forms.Label
         'private System.Windows.Forms.Button btnOpciones;
-        Private timerActualizarFechaHora As Windows.Forms.Timer
-        Private timerSalvaPantalla As Windows.Forms.Timer
-        Private statusStrip1 As Windows.Forms.StatusStrip
-        Private LabelInfo As Windows.Forms.ToolStripStatusLabel
-        Private btnSplitDrop As Windows.Forms.ToolStripDropDownButton
-        Private mnuAcoplarIzq As Windows.Forms.ToolStripMenuItem
-        Private mnuAcoplarDer As Windows.Forms.ToolStripMenuItem
+        Private WithEvents timerActualizarFechaHora As Windows.Forms.Timer
+        Private WithEvents timerSalvaPantalla As Windows.Forms.Timer
+        Private WithEvents statusStrip1 As Windows.Forms.StatusStrip
+        Private WithEvents LabelInfo As Windows.Forms.ToolStripStatusLabel
+        Private WithEvents btnSplitDrop As Windows.Forms.ToolStripDropDownButton
+        Private WithEvents mnuAcoplarIzq As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuAcoplarDer As Windows.Forms.ToolStripMenuItem
         Private toolStripSeparator1 As Windows.Forms.ToolStripSeparator
-        Private mnuRecordarPosicion As Windows.Forms.ToolStripMenuItem
-        Private mnuTopMost As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuRecordarPosicion As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuTopMost As Windows.Forms.ToolStripMenuItem
         Private toolStripSeparator2 As Windows.Forms.ToolStripSeparator
-        Private cboOpacidad As Windows.Forms.ToolStripComboBox
-        Private mnuAcoplarMinimo As Windows.Forms.ToolStripMenuItem
+        Private WithEvents cboOpacidad As Windows.Forms.ToolStripComboBox
+        Private WithEvents mnuAcoplarMinimo As Windows.Forms.ToolStripMenuItem
         Private toolSeparatorCerrar As Windows.Forms.ToolStripSeparator
-        Private mnuCerrar As Windows.Forms.ToolStripMenuItem
-        Private mnuSalvapantalla As Windows.Forms.ToolStripMenuItem
-        Private mnuOpacidad As Windows.Forms.ToolStripMenuItem
-        Private mnuAcoplarTransparente As Windows.Forms.ToolStripMenuItem
-        Private mnuTamañoPequeño As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuCerrar As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuSalvapantalla As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuOpacidad As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuAcoplarTransparente As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuTamañoPequeño As Windows.Forms.ToolStripMenuItem
         Private toolStripSeparator3 As Windows.Forms.ToolStripSeparator
-        Private mnuAcercaDe As Windows.Forms.ToolStripMenuItem
+        Private WithEvents mnuAcercaDe As Windows.Forms.ToolStripMenuItem
     End Class
 End Namespace

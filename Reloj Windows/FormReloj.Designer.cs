@@ -1,7 +1,7 @@
 ﻿
 namespace Reloj_Windows
 {
-    partial class Form1
+    partial class FormReloj
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,7 +30,7 @@ namespace Reloj_Windows
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReloj));
             this.panelCentro = new System.Windows.Forms.Panel();
             this.labelHora = new System.Windows.Forms.Label();
             this.labelFecha = new System.Windows.Forms.Label();
@@ -239,11 +239,13 @@ namespace Reloj_Windows
             // mnuSalvapantalla
             // 
             this.mnuSalvapantalla.Name = "mnuSalvapantalla";
+            this.mnuSalvapantalla.ShortcutKeyDisplayString = "Ctrl+Shit+P";
             this.mnuSalvapantalla.Size = new System.Drawing.Size(281, 22);
-            this.mnuSalvapantalla.Text = "Usar como salvapantalla";
+            this.mnuSalvapantalla.Text = "Iniciar salvapantalla";
             this.mnuSalvapantalla.ToolTipText = "No sustituye a ningún salvapantalla, \r\nsimplemente desplaza la ventana por la pan" +
-    "talla.\r\nPara deterlo haz doble-clic en la fecha o la hora.";
-            this.mnuSalvapantalla.Click += new System.EventHandler(this.MnuSalvaPantalla_Click);
+    "talla.\r\nPara detenerlo haz doble-clic en la fecha o la hora.\r\nPulsa Ctrl+Shit+P " +
+    "para iniciarlo o detenerlo.";
+            this.mnuSalvapantalla.Click += new System.EventHandler(this.MnuSalvapantalla_Click);
             // 
             // mnuOpacidad
             // 
@@ -284,7 +286,7 @@ namespace Reloj_Windows
             this.mnuAcercaDe.ShortcutKeys = System.Windows.Forms.Keys.F1;
             this.mnuAcercaDe.Size = new System.Drawing.Size(281, 22);
             this.mnuAcercaDe.Text = "Acerca de...";
-            this.mnuAcercaDe.Click += new System.EventHandler(this.mnuAcercaDe_Click);
+            this.mnuAcercaDe.Click += new System.EventHandler(this.MnuAcercaDe_Click);
             // 
             // mnuCerrar
             // 
@@ -309,6 +311,7 @@ namespace Reloj_Windows
             this.ClientSize = new System.Drawing.Size(804, 450);
             this.Controls.Add(this.panelCentro);
             this.Controls.Add(this.statusStrip1);
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 180);
@@ -317,6 +320,7 @@ namespace Reloj_Windows
             this.Text = "Reloj Windows (C#)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.Move += new System.EventHandler(this.Form1_Move);
             this.Resize += new System.EventHandler(this.Form1_Resize);
             this.panelCentro.ResumeLayout(false);
@@ -328,6 +332,7 @@ namespace Reloj_Windows
         }
 
         #endregion
+
         //private System.Windows.Forms.Panel panelAbajo;
         //private System.Windows.Forms.Label labelInfo;
         private System.Windows.Forms.Panel panelCentro;

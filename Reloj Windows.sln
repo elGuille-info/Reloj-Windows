@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reloj Windows", "Reloj Windows\Reloj Windows.csproj", "{02EA31C5-8F52-4EE1-9DCA-4EF37052F70D}"
 EndProject
+Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Reloj Windows vb", "Reloj Windows vb\Reloj Windows vb.vbproj", "{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{02EA31C5-8F52-4EE1-9DCA-4EF37052F70D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02EA31C5-8F52-4EE1-9DCA-4EF37052F70D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02EA31C5-8F52-4EE1-9DCA-4EF37052F70D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

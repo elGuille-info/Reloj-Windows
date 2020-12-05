@@ -35,7 +35,7 @@ Namespace Reloj_Windows
             Application.SetHighDpiMode(HighDpiMode.SystemAware)
             Application.EnableVisualStyles()
             Application.SetCompatibleTextRenderingDefault(False)
-            Application.Run(New Form1)
+            Application.Run(New FormReloj)
         End Sub
     End Module
 End Namespace

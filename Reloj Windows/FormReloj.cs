@@ -17,9 +17,16 @@ using System.Windows.Forms;
 
 namespace Reloj_Windows
 {
-    public partial class Form1 : Form
+    public partial class FormReloj : Form
     {
-        // 
+        private readonly System.Reflection.Assembly ensamblado;
+        private readonly FileVersionInfo fvi;
+
+        /// <summary>
+        /// La información de este programa
+        /// </summary>
+        private readonly string InfoApp;
+
         /// <summary>
         /// Para acceder a la propiedades del programa 
         /// </summary>
@@ -42,19 +49,30 @@ namespace Reloj_Windows
         /// </summary>
         private bool? acoplarDonde;
 
-        // El tamaño y posición de la ventana
+        /// <summary>
+        /// Asignar true si se va a cambiar el tamaño después de estar acoplada.
+        /// </summary>
+        private bool estabaAcoplada;
+
+        /// <summary>
+        /// El tamaño y posición de la ventana
+        /// </summary>
         private (int Left, int Top, int Width, int Height) tamVentana;
 
-        // Para la posición anterior a acoplar
-        // asignarlo solo si no está acoplado,
-        // por ejemplo, si estaba acoplado a la derecha y
-        // se cambia a la izquierda, no asignar la posición
+        /// <summary>
+        /// Para la posición anterior a acoplar
+        /// asignarlo solo si no está acoplado,
+        /// por ejemplo, si estaba acoplado a la derecha y
+        /// se cambia a la izquierda, no asignar la posición
+        /// </summary>
         private (int Left, int Top, int Width, int Height) tamAnt;
 
-        // Los textos informativos según se muestre la ventana más ancha o más estrecha
+        /// <summary>
+        /// Los textos informativos según se muestre la ventana más ancha o más estrecha
+        /// </summary>
         private (string Largo, string Corto) textoInfo;
 
-        // Para el salva pantallas
+        // Para el salvapantallas
         private int posLeft = -1;
         private int posTop = -1;
         private readonly Random aleatorio = new Random();
@@ -71,26 +89,30 @@ namespace Reloj_Windows
         private double opacidadAnt;
 
         /// <summary>
-        /// Si está en modo salva pantalla
+        /// Si está en modo salvapantalla
         /// </summary>
         private bool salvaPantallaActivo;
 
-        public Form1()
+        public FormReloj()
         {
             inicializando = true;
 
             InitializeComponent();
 
-            this.ActivoDesde = DateTime.Now;
+            ActivoDesde = DateTime.Now;
+
+            ensamblado = System.Reflection.Assembly.GetExecutingAssembly();
+            fvi = FileVersionInfo.GetVersionInfo(ensamblado.Location);
+            InfoApp = $"{Application.ProductName} v{Application.ProductVersion} ({fvi.FileVersion})";
 
             // Leer los valores de la configuración
 
             if (MySettings.AcoplarDonde == -1)
-                this.acoplarDonde = null;
+                acoplarDonde = null;
             else if (MySettings.AcoplarDonde == 0)
-                this.acoplarDonde = false;
+                acoplarDonde = false;
             else if (MySettings.AcoplarDonde == 1)
-                this.acoplarDonde = true;
+                acoplarDonde = true;
 
             tamVentana = (MySettings.vLeft, MySettings.vTop, MySettings.vWidth, MySettings.vHeight);
 
@@ -108,8 +130,8 @@ namespace Reloj_Windows
             if (ActivoDesde.Year > 2020)
                 s = $"-{ActivoDesde.Year}";
 
-            textoInfo.Corto = $"{Application.ProductName} v{Application.ProductVersion}";
-            textoInfo.Largo = $"{textoInfo.Corto} - (c)Guillermo Som (elGuille), 2000{s}";
+            textoInfo.Corto = $"{InfoApp}";
+            textoInfo.Largo = $"{textoInfo.Corto} - (c)Guillermo Som (elGuille), 2020{s}";
 
             LabelInfo.Text = textoInfo.Largo;
 
@@ -123,11 +145,11 @@ namespace Reloj_Windows
 
             // Asignar el valor antes de inicializar
             // por si se ha acoplado
-            this.tamAnt = (this.Left, this.Top, this.Width, this.Height);
+            tamAnt = (this.Left, this.Top, this.Width, this.Height);
 
             Inicializar();
 
-            this.inicializando = false;
+            inicializando = false;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -144,11 +166,25 @@ namespace Reloj_Windows
             MySettings.Save();
         }
 
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            // Ctrl+Shit+P inicia o cancela el salvapantalla
+            if (!e.Alt && e.Shift && e.Control && e.KeyCode == Keys.P)
+            {
+                //CancelarSalvapantalla();
+                //MnuSalvapantalla_Click(null, null);
+                MostrarSalvapantalla();
+                e.Handled = true;
+                e.SuppressKeyPress = true;
+            }
+        }
+
         private void Form1_Move(object sender, EventArgs e)
         {
             // Solo guardar la posición y tamaño si está en modo normal
             // no está como salvapantallas ni está acoplado
-            if (this.WindowState == FormWindowState.Normal && !salvaPantallaActivo && acoplarDonde is null)
+            if (this.WindowState == FormWindowState.Normal && !salvaPantallaActivo && 
+                        acoplarDonde is null && !mnuTamañoPequeño.Checked)
             {
                 tamVentana = (this.Left, this.Top, this.Width, this.Height);
             }
@@ -157,8 +193,6 @@ namespace Reloj_Windows
         private void Form1_Resize(object sender, EventArgs e)
         {
             if (inicializando) return;
-
-            //var d = DateTime.Now;
 
             // Solo guardar la posición y tamaño si está en modo normal
             // no está como salvapantallas ni está acoplado
@@ -179,9 +213,61 @@ namespace Reloj_Windows
         //
 
         /// <summary>
+        /// Iniciar o detener el salvapantalla.
+        /// Si al detenerlo se quiere cerrar la ventana, indicar true en cerrar.
+        /// </summary>
+        /// <param name="mostrar">True para iniciar el salvapantalla, false para detenerlo.</param>
+        /// <param name="cerrar">Si al detenerlo se quiere cerrar la ventana, indicar true en cerrar. 
+        /// No se tiene en cuenta si mostrar es true.
+        /// </param>
+        /// <remarks>Método público para usarlo desde otra aplicaciones.</remarks>
+        public void Salvapantalla(bool mostrar, bool cerrar)
+        {
+            MySettings.UsarComoSalvaPantalla = mostrar;
+            MySettings.OpacidadAcopleySalvaP = 0.75;
+            MostrarSalvapantalla();
+
+            if (!mostrar && cerrar)
+                this.Close();
+        }
+
+        /// <summary>
+        /// Iniciar o detener el salvapantalla
+        /// </summary>
+        private void MostrarSalvapantalla()
+        {
+            if (inicializando) return;
+
+            mnuSalvapantalla.Checked = !mnuSalvapantalla.Checked;
+            MySettings.UsarComoSalvaPantalla = mnuSalvapantalla.Checked;
+
+            if (MySettings.UsarComoSalvaPantalla)
+            {
+                timerSalvaPantalla.Enabled = MySettings.UsarComoSalvaPantalla;
+
+                // Guardar la posición y tamaño
+                tamVentana = (this.Left, this.Top, this.Width, this.Height);
+
+                // Quitar el borde
+                this.FormBorderStyle = FormBorderStyle.None;
+
+                topMostAnt = this.TopMost;
+                this.TopMost = true;
+
+                opacidadAnt = MySettings.Opacidad;
+                if (MySettings.OpacidadAcopleySalvaP < 0.50)
+                    MySettings.OpacidadAcopleySalvaP = 0.75;
+                this.Opacity = MySettings.OpacidadAcopleySalvaP;
+
+                salvaPantallaActivo = true;
+            }
+            else
+                CancelarSalvapantalla();
+        }
+
+        /// <summary>
         /// Ajustar el tamaño de la fecha/hora y el contenido de la fecha
         /// </summary>
-        /// <param name="d"></param>
         private void AjustarTamañoFechaHora()
         {
             var d = DateTime.Now;
@@ -191,16 +277,21 @@ namespace Reloj_Windows
 
             // El tamaño mínimo de la ventana es: W=350, H = 180
 
-            if (Height > 190)
+            if (this.Height > 190)
             {
+                //// Si ya estaba acoplada, no asignar el tamaño
+                //if (!estabaAcoplada || mnuTamañoPequeño.Checked)
+                //{
+                //}
                 labelFecha.Font = new Font(labelFecha.Font.FontFamily, 37, FontStyle.Bold);
                 labelFecha.Height = 55;
                 labelHora.Height = this.ClientSize.Height - labelFecha.Height - statusStrip1.Height - 60;
             }
 
-            if (Width < 400)
+            if (this.Width < 400)
             {
-                LabelInfo.Text = textoInfo.Corto;
+                //if (!(acoplarDonde is null))
+                LabelInfo.Text = ""; // textoInfo.Corto;
                 this.ControlBox = false;
             }
             else
@@ -209,25 +300,17 @@ namespace Reloj_Windows
                 this.ControlBox = true;
             }
 
-            float fs = (float)(Width / 7); // 6.7
+            float fs = (float)(this.Width / 7); // 6.7
             labelHora.Font = new Font(labelHora.Font.FontFamily, fs, FontStyle.Bold);
 
-            if (Width < 500)
-            {
+            if (this.Width < 500)
                 labelFecha.Text = d.ToString("dd.MMMyyyy");
-            }
-            else if (Width < 650)
-            {
+            else if (this.Width < 650)
                 labelFecha.Text = d.ToString("ddd, dd.MMMyyyy");
-            }
-            else if (Width < 750)
-            {
+            else if (this.Width < 750)
                 labelFecha.Text = d.ToString("dddd, dd.MMMyyyy");
-            }
             else
-            {
                 labelFecha.Text = d.ToString("dddd, dd MMMM yyyy");
-            }
         }
 
         /// <summary>
@@ -239,10 +322,10 @@ namespace Reloj_Windows
         /// </param>
         private void AcoplarVentana(bool? donde)
         {
-            this.inicializando = true;
+            inicializando = true;
 
             if (acoplarDonde is null)
-                this.tamAnt = (Left, Top, Width, Height);
+                this.tamAnt = (this.Left, this.Top, this.Width, this.Height);
 
             if (donde is null)
             {
@@ -266,10 +349,12 @@ namespace Reloj_Windows
                 }
                 this.FormBorderStyle = FormBorderStyle.Sizable;
                 this.Opacity = MySettings.Opacidad;
+                estabaAcoplada = false;
             }
             else
             {
                 this.FormBorderStyle = FormBorderStyle.None;
+                estabaAcoplada = true;
 
                 if (MySettings.AcoplarTransparente)
                     this.Opacity = MySettings.OpacidadAcopleySalvaP;
@@ -294,9 +379,9 @@ namespace Reloj_Windows
                 }
             }
 
-            this.acoplarDonde = donde;
+            acoplarDonde = donde;
 
-            this.inicializando = false;
+            inicializando = false;
         }
 
         /// <summary>
@@ -322,6 +407,41 @@ namespace Reloj_Windows
                 labelFecha.Text = DateTime.Now.ToString("ddd, dd.MMMyyyy");
                 labelHora.Height = this.ClientSize.Height - labelFecha.Height - statusStrip1.Height - 20;
             }
+        }
+
+        /// <summary>
+        /// Cancelar el salvapantalla.
+        /// </summary>
+        private void CancelarSalvapantalla()
+        {
+            timerSalvaPantalla.Enabled = false;
+
+            mnuSalvapantalla.Checked = false;
+            this.TopMost = topMostAnt;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+            this.Opacity = opacidadAnt;
+
+            if (!mnuTamañoPequeño.Checked)
+            {
+                // Posicionarlo donde estaba si no está marcado el tamaño pequeño
+                //this.Left = tamVentana.Left;
+                //if (this.Left > Screen.PrimaryScreen.WorkingArea.Width - this.Width)
+                //    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+                //this.Top = tamVentana.Top;
+                //this.Width = tamVentana.Width;
+                //this.Height = tamVentana.Height;
+                this.Left = tamAnt.Left;
+                if (this.Left > Screen.PrimaryScreen.WorkingArea.Width - this.Width)
+                    this.Left = Screen.PrimaryScreen.WorkingArea.Width - this.Width;
+                this.Top = tamAnt.Top;
+                this.Width = tamAnt.Width;
+                this.Height = tamAnt.Height;
+
+            }
+
+            salvaPantallaActivo = false;
+
+            mnuTamañoPequeño.Checked = false;
         }
 
         /// <summary>
@@ -359,13 +479,12 @@ namespace Reloj_Windows
 
             // Solo asignarlo si no está acoplada
             if (acoplarDonde is null)
-                this.tamAnt = (Left, Top, Width, Height);
+                tamAnt = (this.Left, this.Top, this.Width, this.Height);
 
             mnuAcoplarDer.Checked = MySettings.AcoplarDonde == 1;
             mnuAcoplarIzq.Checked = MySettings.AcoplarDonde == 0;
             mnuAcoplarMinimo.Checked = MySettings.AcoplarMinimo;
             mnuRecordarPosicion.Checked = MySettings.RecordarPos;
-            //mnuSalvapantalla.Checked =
             mnuTopMost.Checked = MySettings.SiempreEncima;
             mnuAcoplarTransparente.Checked = MySettings.AcoplarTransparente;
 
@@ -439,20 +558,16 @@ namespace Reloj_Windows
 
         private void MoverForm_MouseDown(object sender, MouseEventArgs e)
         {
-            //if (this.ControlBox) return;
-
             if (e.Button == MouseButtons.Left)
             {
-                this.ratonPulsado = true;
-                this.pX = e.X;
-                this.pY = e.Y;
+                ratonPulsado = true;
+                pX = e.X;
+                pY = e.Y;
             }
         }
 
         private void MoverForm_MouseMove(object sender, MouseEventArgs e)
         {
-            //if (this.ControlBox) return;
-
             if (ratonPulsado)
             {
                 this.Left += e.X - pX;
@@ -462,7 +577,7 @@ namespace Reloj_Windows
 
         private void MoverForm_MouseUp(object sender, MouseEventArgs e)
         {
-            this.ratonPulsado = false;
+            ratonPulsado = false;
         }
 
         //
@@ -520,14 +635,19 @@ namespace Reloj_Windows
 
         private void BtnSplitDrop_DropDownOpening(object sender, EventArgs e)
         {
-            //// Si está el control box del formulario, ocultar el menú cerrar
-            //// y viceversa
-            //toolSeparatorCerrar.Visible = !this.ControlBox;
-            //mnuCerrar.Visible = !this.ControlBox;
-            if(mnuTamañoPequeño.Checked)
+            // Poner a tamaño pequeño o restaurar
+            if (mnuTamañoPequeño.Checked)
                 mnuTamañoPequeño.Text = "Cambiar al tamaño normal";
             else
                 mnuTamañoPequeño.Text = "Cambiar al tamaño a pequeño";
+            
+            mnuTamañoPequeño.Enabled = !estabaAcoplada;
+
+            // El salvapantalla
+            if (mnuSalvapantalla.Checked)
+                mnuSalvapantalla.Text = "Detener salvapantalla";
+            else
+                mnuSalvapantalla.Text = "Iniciar salvapantalla";
         }
 
         private void MnuRecordarPosicion_Click(object sender, EventArgs e)
@@ -562,57 +682,17 @@ namespace Reloj_Windows
             this.Close();
         }
 
-        private void MnuSalvaPantalla_Click(object sender, EventArgs e)
+        private void MnuSalvapantalla_Click(object sender, EventArgs e)
         {
-            if (inicializando) return;
-
-            // Guardar la posición y tamaño
-            tamVentana = (this.Left, this.Top, this.Width, this.Height);
-
-            mnuSalvapantalla.Checked = !mnuSalvapantalla.Checked;
-            MySettings.UsarComoSalvaPantalla = mnuSalvapantalla.Checked;
-
-            timerSalvaPantalla.Enabled = MySettings.UsarComoSalvaPantalla;
-
-            if (MySettings.UsarComoSalvaPantalla)
-            {
-                // Quitar el borde
-                this.FormBorderStyle = FormBorderStyle.None;
-
-                topMostAnt = this.TopMost;
-                this.TopMost = true;
-
-                opacidadAnt = MySettings.Opacidad;
-                this.Opacity = MySettings.OpacidadAcopleySalvaP;
-
-                salvaPantallaActivo = true;
-            }
-            else
-            { 
-            }
+            MostrarSalvapantalla();
         }
 
         /// <summary>
-        /// Desactivar el salva pantalla al hacer doble clic en la fec o la hora
+        /// Desactivar el salvapantalla al hacer doble clic en la fec o la hora
         /// </summary>
         private void LabelFechaHora_DoubleClick(object sender, EventArgs e)
         {
-            timerSalvaPantalla.Enabled = false;
-
-            mnuSalvapantalla.Checked = false;
-            this.TopMost = topMostAnt;
-            this.FormBorderStyle = FormBorderStyle.Sizable;
-            this.Opacity = opacidadAnt;
-
-            // Posicionarlo donde estaba
-            this.Left = tamVentana.Left;
-            this.Top = tamVentana.Top;
-            this.Width = tamVentana.Width;
-            this.Height = tamVentana.Height;
-
-            salvaPantallaActivo = false;
-
-            mnuTamañoPequeño.Checked = false;
+            CancelarSalvapantalla();
         }
 
         private void MnuAcoplarTransparente_Click(object sender, EventArgs e)
@@ -628,8 +708,9 @@ namespace Reloj_Windows
         {
             if (inicializando) return;
 
-            //tamAnt = (this.Left, this.Top, this.Width, this.Height);
             mnuTamañoPequeño.Checked = !mnuTamañoPequeño.Checked;
+            if (estabaAcoplada) return;
+
             if (mnuTamañoPequeño.Checked)
             {
                 PonerTamañoAcoplar(true);
@@ -637,20 +718,27 @@ namespace Reloj_Windows
             else
             {
                 inicializando = true;
-                LabelFechaHora_DoubleClick(null, null);
+                CancelarSalvapantalla();
                 AjustarTamañoFechaHora();
                 inicializando = false;
-                //// Posicionarlo donde estaba
-                //this.Left = tamVentana.Left;
-                //this.Top = tamVentana.Top;
-                //this.Width = tamVentana.Width;
-                //this.Height = tamVentana.Height;
             }
         }
 
-        private void mnuAcercaDe_Click(object sender, EventArgs e)
+        private void MnuAcercaDe_Click(object sender, EventArgs e)
         {
-            var msg = @$"Acerca de {Application.ProductName} v{Application.ProductVersion}
+            var versionWeb = "xx";
+            var msgVersion = $"{"\r\n"}{"\r\n"}Esta versión de '{Application.ProductName}' es la más reciente.";
+            
+            var cualVersion = VersionUtilidades.CompararVersionWeb(ensamblado, ref versionWeb);
+            
+            if (cualVersion == 1)
+                msgVersion = $"{"\r\n"}{"\r\n"}En la web hay una versión más reciente: {versionWeb}";
+            else if (cualVersion == -1)
+                msgVersion = $"{"\r\n"}{"\r\n"}Esta versión de '{Application.ProductName}' es más reciente que la de la web: {versionWeb}";
+
+            var titulo = $"Acerca de {InfoApp }";
+
+            var msg = @$"{titulo}
 
 Esta aplicación es un 'simple' reloj que te muestra la fecha y la hora en una ventana.
 
@@ -661,10 +749,10 @@ Puedes hacer que esté encima del resto de ventanas.
 Además puedes hacerla menos opaca (más transparente) para que pueda verse lo que hay debajo de la ventana.
 El nivel de transparencia lo puedes controlar a tu gusto, desde casi totalmente transparente a totalmente opaca.
 
-Puedes usarla también como una especie de salva pantallas (se va desplazando por la pantalla), pero con transparencia con idea de que veas lo que hay debajo sin tener que detener la aplicación.
+Puedes usarla también como una especie de salvapantallas (se va desplazando por la pantalla), pero con transparencia con idea de que veas lo que hay debajo sin tener que detener la aplicación.
 Si quieres dejar de ver cómo se mueve por la pantalla, simplemente haz doble-clic en la fecha o en la hora.
-El salva pantallas lo puedes usar a tamaño normal o en tamaño pequeño.
-Cuando funciona como salva pantalla siempre está encima del resto de las ventanas y no muestra la barra de título.
+El salvapantallas lo puedes usar a tamaño normal o en tamaño pequeño.
+Cuando funciona como salvapantalla siempre está encima del resto de las ventanas y no muestra la barra de título.
 
 La ventana la puedes mover desde la barra de título o bien manteniendo el ratón pulsado en la fecha o en la hora.
 
@@ -672,8 +760,8 @@ También puedes acoplarla en la parte superior izquierda o derecha, en esos caso
 
 Y esto es casi todo... creo... en el menú de opciones (en el botón que hay abajo a la derecha) están todas las opciones de uso disponibles.
 
-¡Disfrútala! :-)";
-            MessageBox.Show(msg, $"Acerca de {Application.ProductName} v{Application.ProductVersion}", 
+¡Disfrútala! :-)" + msgVersion;
+            MessageBox.Show(msg, titulo, 
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }
