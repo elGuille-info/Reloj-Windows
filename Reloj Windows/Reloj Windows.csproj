@@ -5,7 +5,7 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Reloj_Windows</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.0.10</Version>
+    <Version>1.0.0.11</Version>
     <Authors>Guillermo Som (elGuille)</Authors>
     <Company>elGuille</Company>
     <ApplicationIcon>Reloj Windows (Monitor.WinVista).ico</ApplicationIcon>
@@ -13,8 +13,9 @@
 
 (para .NET 5.0 revisión del 12-dic-2010)
 
-v1.0.0.10 (12-dic-20) Añado un icono de notificación para que no se muestre la aplicación en la barra de tareas y sí el icono en el área de notificación.</Description>
-    <PackageReleaseNotes>v1.0.0.10 (12-dic-20) Añado un icono de notificación para que no se muestre la aplicación en la barra de tareas y sí el icono en el área de notificación.
+v1.0.0.11 (12-dic-20) Añado algunos menús del menú normal al icono de notificación.</Description>
+    <PackageReleaseNotes>v1.0.0.11 (12-dic-20) Añado algunos menús del menú normal al icono de notificación.
+v1.0.0.10 (12-dic-20) Añado un icono de notificación para que no se muestre la aplicación en la barra de tareas y sí el icono en el área de notificación.
 v1.0.0.9 (05-dic-20) Cambio el nombre del form y añado un método público para llamar al salvapantalla.
 v1.0.0.8 (05-dic-20) Usar Ctrl+Shift+P para activar / desactivar el salvapantalla.
 v1.0.0.7 (05-dic-20) Muestro también el valor de FileVersion por si se maniente una versión diferente a la versión del producto.

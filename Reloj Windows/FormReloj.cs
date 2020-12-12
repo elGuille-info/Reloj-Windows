@@ -130,6 +130,32 @@ namespace Reloj_Windows
             notifyIcon1.Text = Application.ProductName;
             NotifyMenuRestaurar.Text = "Minimizar";
             notifyIcon1.Icon = this.Icon;
+            //Añadir los menús de la aplicación al contextMenu
+            // Quito el menú de cerrar porque ya está en el otro
+            notifyContextMenu.Items.Remove(NotifyMenuCerrar);
+            // hay que añadirlos uno a uno... para asignar el método de evento
+            notifyContextMenu.Items.Add(mnu01AcoplarDer.Clonar(MnuAcoplarDer_Click));
+            notifyContextMenu.Items.Add(mnu02AcoplarIzq.Clonar(MnuAcoplarIzq_Click));
+            notifyContextMenu.Items.Add(mnu03AcoplarMinimo.Clonar(MnuAcoplarMinimo_Click));
+            notifyContextMenu.Items.Add(mnu04AcoplarTransparente.Clonar(MnuAcoplarTransparente_Click));
+            notifyContextMenu.Items.Add(new ToolStripSeparator());
+            notifyContextMenu.Items.Add(mnu06TamañoPequeño.Clonar(mnuTamañoPequeño_Click));
+            notifyContextMenu.Items.Add(new ToolStripSeparator());
+            //notifyContextMenu.Items.Add(mnu08RecordarPosicion.Clonar(mnuRecordarPosicion_Click));
+            notifyContextMenu.Items.Add(mnu09TopMost.Clonar(mnuTopMost_Click));
+            notifyContextMenu.Items.Add(new ToolStripSeparator());
+            //notifyContextMenu.Items.Add(mnu11Salvapantalla.Clonar(mnuSalvapantalla_Click));
+            //notifyContextMenu.Items.Add(new ToolStripSeparator());
+            //notifyContextMenu.Items.Add(mnu13AcercaDe.Clonar(MnuAcercaDe_Click));
+            notifyContextMenu.Items.Add(NotifyMenuCerrar);
+
+            for (var i = 0; i < btnSplitDrop.DropDownItems.Count; i++)
+            {
+                // Así no vale porque no se añaden todos 
+                // y no se pueden usar en los dos sitios.
+                //notifyContextMenu.Items.Add(btnSplitDrop.DropDownItems[i]);
+                //notifyContextMenu.Items.Add(btnSplitDrop.DropDownItems[i].Clonar(btnSplitDrop.DropDownItems[i]);
+            }
             notifyIcon1.Visible = true;
             this.ShowInTaskbar = false;
 
@@ -182,8 +208,8 @@ namespace Reloj_Windows
             if (!e.Alt && e.Shift && e.Control && e.KeyCode == Keys.P)
             {
                 //CancelarSalvapantalla();
-                //MnuSalvapantalla_Click(null, null);
-                MostrarSalvapantalla();
+                //mnu11Salvapantalla_Click(null, null);
+                MostrarSalvapantalla(mnuSalvap);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
             }
@@ -194,7 +220,7 @@ namespace Reloj_Windows
             // Solo guardar la posición y tamaño si está en modo normal
             // no está como salvapantallas ni está acoplado
             if (this.WindowState == FormWindowState.Normal && !salvaPantallaActivo && 
-                        acoplarDonde is null && !mnuTamañoPequeño.Checked)
+                        acoplarDonde is null && !mnu06TamañoPequeño.Checked)
             {
                 tamVentana = (this.Left, this.Top, this.Width, this.Height);
             }
@@ -212,7 +238,7 @@ namespace Reloj_Windows
             // Solo guardar la posición y tamaño si está en modo normal
             // no está como salvapantallas ni está acoplado
             if (this.WindowState == FormWindowState.Normal && !salvaPantallaActivo &&
-                        acoplarDonde is null && !mnuTamañoPequeño.Checked)
+                        acoplarDonde is null && !mnu06TamañoPequeño.Checked)
             {
                 tamVentana = (this.Left, this.Top, this.Width, this.Height);
             }
@@ -240,21 +266,26 @@ namespace Reloj_Windows
         {
             MySettings.UsarComoSalvaPantalla = mostrar;
             MySettings.OpacidadAcopleySalvaP = 0.75;
-            MostrarSalvapantalla();
+            MostrarSalvapantalla(mnuSalvap);
 
             if (!mostrar && cerrar)
                 this.Close();
         }
 
+        private ToolStripMenuItem mnuSalvap;
+
         /// <summary>
         /// Iniciar o detener el salvapantalla
         /// </summary>
-        private void MostrarSalvapantalla()
+        private void MostrarSalvapantalla(object sender)
         {
             if (inicializando) return;
 
-            mnuSalvapantalla.Checked = !mnuSalvapantalla.Checked;
-            MySettings.UsarComoSalvaPantalla = mnuSalvapantalla.Checked;
+            var mnu = sender as ToolStripMenuItem;
+            if (mnu is null) return;
+            mnuSalvap = mnu;
+            mnu.Checked = !mnu.Checked;
+            MySettings.UsarComoSalvaPantalla = mnu.Checked;
 
             if (MySettings.UsarComoSalvaPantalla)
             {
@@ -295,7 +326,7 @@ namespace Reloj_Windows
             if (this.Height > 190)
             {
                 //// Si ya estaba acoplada, no asignar el tamaño
-                //if (!estabaAcoplada || mnuTamañoPequeño.Checked)
+                //if (!estabaAcoplada || mnu06TamañoPequeño.Checked)
                 //{
                 //}
                 labelFecha.Font = new Font(labelFecha.Font.FontFamily, 37, FontStyle.Bold);
@@ -346,8 +377,8 @@ namespace Reloj_Windows
             {
                 // Dejarla en la posición normal
                 // no acoplar
-                mnuAcoplarDer.Checked = false;
-                mnuAcoplarIzq.Checked = false;
+                mnu01AcoplarDer.Checked = false;
+                mnu02AcoplarIzq.Checked = false;
 
                 // Restaurar la posición y tamaño guardados
                 if (!(tamAnt.Left < 0 && tamAnt.Top < 0 &&
@@ -380,8 +411,8 @@ namespace Reloj_Windows
                     // Posicionar la ventana arriba a la derecha
                     this.Left = Screen.PrimaryScreen.WorkingArea.Width - Width;
                     this.Top = 0;
-                    mnuAcoplarDer.Checked = true;
-                    mnuAcoplarIzq.Checked = false;
+                    mnu01AcoplarDer.Checked = true;
+                    mnu02AcoplarIzq.Checked = false;
                 }
                 else if (!donde.Value)
                 {
@@ -389,8 +420,8 @@ namespace Reloj_Windows
                     // Posicionar la ventana arriba a la izquierda
                     this.Left = 0;
                     this.Top = 0;
-                    mnuAcoplarIzq.Checked = true;
-                    mnuAcoplarDer.Checked = false;
+                    mnu02AcoplarIzq.Checked = true;
+                    mnu01AcoplarDer.Checked = false;
                 }
             }
 
@@ -431,12 +462,12 @@ namespace Reloj_Windows
         {
             timerSalvaPantalla.Enabled = false;
 
-            mnuSalvapantalla.Checked = false;
+            mnu11Salvapantalla.Checked = false;
             this.TopMost = topMostAnt;
             this.FormBorderStyle = FormBorderStyle.Sizable;
             this.Opacity = opacidadAnt;
 
-            if (!mnuTamañoPequeño.Checked)
+            if (!mnu06TamañoPequeño.Checked)
             {
                 // Posicionarlo donde estaba si no está marcado el tamaño pequeño
                 //this.Left = tamVentana.Left;
@@ -456,7 +487,7 @@ namespace Reloj_Windows
 
             salvaPantallaActivo = false;
 
-            mnuTamañoPequeño.Checked = false;
+            mnu06TamañoPequeño.Checked = false;
         }
 
         /// <summary>
@@ -496,12 +527,12 @@ namespace Reloj_Windows
             if (acoplarDonde is null)
                 tamAnt = (this.Left, this.Top, this.Width, this.Height);
 
-            mnuAcoplarDer.Checked = MySettings.AcoplarDonde == 1;
-            mnuAcoplarIzq.Checked = MySettings.AcoplarDonde == 0;
-            mnuAcoplarMinimo.Checked = MySettings.AcoplarMinimo;
-            mnuRecordarPosicion.Checked = MySettings.RecordarPos;
-            mnuTopMost.Checked = MySettings.SiempreEncima;
-            mnuAcoplarTransparente.Checked = MySettings.AcoplarTransparente;
+            mnu01AcoplarDer.Checked = MySettings.AcoplarDonde == 1;
+            mnu02AcoplarIzq.Checked = MySettings.AcoplarDonde == 0;
+            mnu03AcoplarMinimo.Checked = MySettings.AcoplarMinimo;
+            mnu08RecordarPosicion.Checked = MySettings.RecordarPos;
+            mnu09TopMost.Checked = MySettings.SiempreEncima;
+            mnu04AcoplarTransparente.Checked = MySettings.AcoplarTransparente;
 
             AcoplarVentana(acoplarDonde);
 
@@ -611,24 +642,35 @@ namespace Reloj_Windows
         {
             if (inicializando) return;
 
-            mnuAcoplarDer.Checked = !mnuAcoplarDer.Checked;
+            var mnu = sender as ToolStripMenuItem;
+            mnu.Checked = !mnu.Checked;
+
+            mnu01AcoplarDer.Checked = mnu.Checked;// !mnu01AcoplarDer.Checked;
             // Acoplar a la derecha
-            if (mnuAcoplarDer.Checked)
+            if (mnu01AcoplarDer.Checked)
                 AcoplarVentana(true);
             else
                 AcoplarVentana(null);
+            
+            ((ToolStripMenuItem)notifyContextMenu.Items[mnu.Name]).Checked = mnu.Checked;
+
         }
 
         private void MnuAcoplarIzq_Click(object sender, EventArgs e)
         {
             if (inicializando) return;
 
-            mnuAcoplarIzq.Checked = !mnuAcoplarIzq.Checked;
+            var mnu = sender as ToolStripMenuItem;
+            mnu.Checked = !mnu.Checked;
+
+            mnu02AcoplarIzq.Checked = mnu.Checked; // !mnu02AcoplarIzq.Checked;
             // Acoplar arriba a la izquierda
-            if (mnuAcoplarIzq.Checked)
+            if (mnu02AcoplarIzq.Checked)
                 AcoplarVentana(false);
             else
                 AcoplarVentana(null);
+
+            ((ToolStripMenuItem)notifyContextMenu.Items[mnu.Name]).Checked = mnu.Checked;
         }
 
         private void CboOpacidad_SelectedIndexChanged(object sender, EventArgs e)
@@ -651,45 +693,55 @@ namespace Reloj_Windows
         private void BtnSplitDrop_DropDownOpening(object sender, EventArgs e)
         {
             // Poner a tamaño pequeño o restaurar
-            if (mnuTamañoPequeño.Checked)
-                mnuTamañoPequeño.Text = "Cambiar al tamaño normal";
+            if (mnu06TamañoPequeño.Checked)
+                mnu06TamañoPequeño.Text = "Cambiar al tamaño normal";
             else
-                mnuTamañoPequeño.Text = "Cambiar al tamaño a pequeño";
+                mnu06TamañoPequeño.Text = "Cambiar al tamaño a pequeño";
             
-            mnuTamañoPequeño.Enabled = !estabaAcoplada;
+            mnu06TamañoPequeño.Enabled = !estabaAcoplada;
 
             // El salvapantalla
-            if (mnuSalvapantalla.Checked)
-                mnuSalvapantalla.Text = "Detener salvapantalla";
+            if (mnu11Salvapantalla.Checked)
+                mnu11Salvapantalla.Text = "Detener salvapantalla";
             else
-                mnuSalvapantalla.Text = "Iniciar salvapantalla";
+                mnu11Salvapantalla.Text = "Iniciar salvapantalla";
         }
 
-        private void MnuRecordarPosicion_Click(object sender, EventArgs e)
+        private void mnuRecordarPosicion_Click(object sender, EventArgs e)
         {
             if (inicializando) return;
 
-            mnuRecordarPosicion.Checked = !mnuRecordarPosicion.Checked;
-            MySettings.RecordarPos = mnuRecordarPosicion.Checked;
+            mnu08RecordarPosicion.Checked = !mnu08RecordarPosicion.Checked;
+            MySettings.RecordarPos = mnu08RecordarPosicion.Checked;
         }
 
-        private void MnuTopMost_Click(object sender, EventArgs e)
+        private void mnuTopMost_Click(object sender, EventArgs e)
         {
             if (inicializando) return;
 
-            mnuTopMost.Checked = !mnuTopMost.Checked;
+            var mnu = sender as ToolStripMenuItem;
+            mnu.Checked = !mnu.Checked;
 
-            this.TopMost = mnuTopMost.Checked;
+            mnu09TopMost.Checked = mnu.Checked; // !mnu09TopMost.Checked;
+
+            this.TopMost = mnu09TopMost.Checked;
             MySettings.SiempreEncima = this.TopMost;
+
+            ((ToolStripMenuItem)notifyContextMenu.Items[mnu.Name]).Checked = mnu.Checked;
         }
 
         private void MnuAcoplarMinimo_Click(object sender, EventArgs e)
         {
             if (inicializando) return;
+            
+            var mnu = sender as ToolStripMenuItem;
+            mnu.Checked = !mnu.Checked;
 
-            mnuAcoplarMinimo.Checked = !mnuAcoplarMinimo.Checked;
-            MySettings.AcoplarMinimo = mnuAcoplarMinimo.Checked;
+            mnu03AcoplarMinimo.Checked = mnu.Checked; // !mnu03AcoplarMinimo.Checked;
+            MySettings.AcoplarMinimo = mnu03AcoplarMinimo.Checked;
             AcoplarVentana(acoplarDonde);
+            
+            ((ToolStripMenuItem)notifyContextMenu.Items[mnu.Name]).Checked = mnu.Checked;
         }
 
         private void MnuCerrar_Click(object sender, EventArgs e)
@@ -697,9 +749,9 @@ namespace Reloj_Windows
             this.Close();
         }
 
-        private void MnuSalvapantalla_Click(object sender, EventArgs e)
+        private void mnuSalvapantalla_Click(object sender, EventArgs e)
         {
-            MostrarSalvapantalla();
+            MostrarSalvapantalla(sender);
         }
 
         /// <summary>
@@ -714,19 +766,27 @@ namespace Reloj_Windows
         {
             if (inicializando) return;
 
-            mnuAcoplarTransparente.Checked = !mnuAcoplarTransparente.Checked;
-            MySettings.AcoplarTransparente = mnuAcoplarTransparente.Checked;
+            var mnu = sender as ToolStripMenuItem;
+            mnu.Checked = !mnu.Checked;
+
+            mnu04AcoplarTransparente.Checked = mnu.Checked; // !mnu04AcoplarTransparente.Checked;
+            MySettings.AcoplarTransparente = mnu04AcoplarTransparente.Checked;
             AcoplarVentana(acoplarDonde);
+
+            ((ToolStripMenuItem)notifyContextMenu.Items[mnu.Name]).Checked = mnu.Checked;
         }
 
-        private void MnuTamañoPequeño_Click(object sender, EventArgs e)
+        private void mnuTamañoPequeño_Click(object sender, EventArgs e)
         {
             if (inicializando) return;
 
-            mnuTamañoPequeño.Checked = !mnuTamañoPequeño.Checked;
+            var mnu = sender as ToolStripMenuItem;
+            mnu.Checked = !mnu.Checked;
+
+            mnu06TamañoPequeño.Checked = mnu.Checked; // !mnu06TamañoPequeño.Checked;
             if (estabaAcoplada) return;
 
-            if (mnuTamañoPequeño.Checked)
+            if (mnu06TamañoPequeño.Checked)
             {
                 PonerTamañoAcoplar(true);
             }
@@ -737,6 +797,7 @@ namespace Reloj_Windows
                 AjustarTamañoFechaHora();
                 inicializando = false;
             }
+            ((ToolStripMenuItem)notifyContextMenu.Items[mnu.Name]).Checked = mnu.Checked;
         }
 
         private void MnuAcercaDe_Click(object sender, EventArgs e)
