@@ -128,6 +128,13 @@ Namespace Reloj_Windows
             labelHora.Text = ActivoDesde.ToString("HH:mm:ss")
             labelFecha.Text = ActivoDesde.ToString("dddd, dd MMMM yyyy")
 
+            ' Para el icono del área de notificación
+            NotifyIcon1.Text = Application.ProductName
+            NotifyMenuRestaurar.Text = "Minimizar"
+            NotifyIcon1.Icon = Me.Icon
+            NotifyIcon1.Visible = True
+            Me.ShowInTaskbar = False
+
             Dim s As String = ""
             If ActivoDesde.Year > 2020 Then
                 s = $"-{ActivoDesde.Year}"
@@ -166,6 +173,12 @@ Namespace Reloj_Windows
             MySettings.vHeight = tamVentana.Height
 
             MySettings.Save()
+
+            Try
+                NotifyIcon1.Visible = False
+            Catch
+            End Try
+
         End Sub
 
         Private Sub Form1_KeyUp(sender As Object, e As KeyEventArgs) Handles MyBase.KeyUp
@@ -189,6 +202,12 @@ Namespace Reloj_Windows
 
         Private Sub Form1_Resize(sender As Object, e As EventArgs) Handles MyBase.Resize
             If inicializando Then Return
+
+            If Me.WindowState = FormWindowState.Normal Then
+                NotifyMenuRestaurar.Text = "Minimizar"
+            Else
+                NotifyMenuRestaurar.Text = "Restaurar"
+            End If
 
             ' Solo guardar la posición y tamaño si está en modo normal
             ' no está como salvapantallas ni está acoplado
@@ -706,6 +725,20 @@ Y esto es casi todo... creo... en el menú de opciones (en el botón que hay aba
 
             MessageBox.Show(msg, titulo,
                             MessageBoxButtons.OK, MessageBoxIcon.Information)
+        End Sub
+
+        Private Sub NotifyMenuCerrar_Click(sender As Object, e As EventArgs) Handles NotifyMenuCerrar.Click
+            Me.Close()
+        End Sub
+
+        Private Sub NotifyMenuRestaurar_Click(sender As Object, e As EventArgs) Handles NotifyMenuRestaurar.Click
+            If Me.WindowState = FormWindowState.Normal Then
+                NotifyMenuRestaurar.Text = "Restaurar"
+                Me.WindowState = FormWindowState.Minimized
+            Else
+                NotifyMenuRestaurar.Text = "Minimizar"
+                Me.WindowState = FormWindowState.Normal
+            End If
         End Sub
     End Class
 End Namespace

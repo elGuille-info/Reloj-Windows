@@ -54,8 +54,14 @@ Namespace Reloj_Windows
             Me.mnuCerrar = New System.Windows.Forms.ToolStripMenuItem()
             Me.timerActualizarFechaHora = New System.Windows.Forms.Timer(Me.components)
             Me.timerSalvaPantalla = New System.Windows.Forms.Timer(Me.components)
+            Me.NotifyIcon1 = New System.Windows.Forms.NotifyIcon(Me.components)
+            Me.NotifyContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+            Me.NotifyMenuRestaurar = New System.Windows.Forms.ToolStripMenuItem()
+            Me.NotifySeparator = New System.Windows.Forms.ToolStripSeparator()
+            Me.NotifyMenuCerrar = New System.Windows.Forms.ToolStripMenuItem()
             Me.panelCentro.SuspendLayout()
             Me.statusStrip1.SuspendLayout()
+            Me.NotifyContextMenu.SuspendLayout()
             Me.SuspendLayout()
             '
             'panelCentro
@@ -246,22 +252,55 @@ Namespace Reloj_Windows
             'timerSalvaPantalla
             '
             '
-            'Form1
+            'NotifyIcon1
+            '
+            Me.NotifyIcon1.ContextMenuStrip = Me.NotifyContextMenu
+            Me.NotifyIcon1.Text = "NotifyIcon1"
+            Me.NotifyIcon1.Visible = True
+            '
+            'NotifyContextMenu
+            '
+            Me.NotifyContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NotifyMenuRestaurar, Me.NotifySeparator, Me.NotifyMenuCerrar})
+            Me.NotifyContextMenu.Name = "NotifyContextMenu"
+            Me.NotifyContextMenu.Size = New System.Drawing.Size(124, 54)
+            '
+            'NotifyMenuRestaurar
+            '
+            Me.NotifyMenuRestaurar.Image = CType(resources.GetObject("NotifyMenuRestaurar.Image"), System.Drawing.Image)
+            Me.NotifyMenuRestaurar.Name = "NotifyMenuRestaurar"
+            Me.NotifyMenuRestaurar.Size = New System.Drawing.Size(123, 22)
+            Me.NotifyMenuRestaurar.Text = "Restaurar"
+            '
+            'NotifySeparator
+            '
+            Me.NotifySeparator.Name = "NotifySeparator"
+            Me.NotifySeparator.Size = New System.Drawing.Size(120, 6)
+            '
+            'NotifyMenuCerrar
+            '
+            Me.NotifyMenuCerrar.Image = CType(resources.GetObject("NotifyMenuCerrar.Image"), System.Drawing.Image)
+            Me.NotifyMenuCerrar.Name = "NotifyMenuCerrar"
+            Me.NotifyMenuCerrar.Size = New System.Drawing.Size(123, 22)
+            Me.NotifyMenuCerrar.Text = "Cerrar"
+            '
+            'FormReloj
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(7.0!, 15.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.ClientSize = New System.Drawing.Size(804, 450)
             Me.Controls.Add(Me.panelCentro)
             Me.Controls.Add(Me.statusStrip1)
+            Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
             Me.MaximizeBox = False
             Me.MinimizeBox = False
             Me.MinimumSize = New System.Drawing.Size(350, 180)
-            Me.Name = "Form1"
+            Me.Name = "FormReloj"
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
             Me.Text = "Reloj Windows (VB)"
             Me.panelCentro.ResumeLayout(False)
             Me.statusStrip1.ResumeLayout(False)
             Me.statusStrip1.PerformLayout()
+            Me.NotifyContextMenu.ResumeLayout(False)
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -296,5 +335,10 @@ Namespace Reloj_Windows
         Private WithEvents mnuTamañoPequeño As Windows.Forms.ToolStripMenuItem
         Private toolStripSeparator3 As Windows.Forms.ToolStripSeparator
         Private WithEvents mnuAcercaDe As Windows.Forms.ToolStripMenuItem
+        Private WithEvents NotifyIcon1 As Windows.Forms.NotifyIcon
+        Private WithEvents NotifyContextMenu As Windows.Forms.ContextMenuStrip
+        Private WithEvents NotifyMenuRestaurar As Windows.Forms.ToolStripMenuItem
+        Private WithEvents NotifySeparator As Windows.Forms.ToolStripSeparator
+        Private WithEvents NotifyMenuCerrar As Windows.Forms.ToolStripMenuItem
     End Class
 End Namespace

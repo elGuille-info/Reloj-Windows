@@ -126,6 +126,13 @@ namespace Reloj_Windows
             labelHora.Text = ActivoDesde.ToString("HH:mm:ss");
             labelFecha.Text = ActivoDesde.ToString("dddd, dd MMMM yyyy");
 
+            // Para el icono del área de notificación
+            notifyIcon1.Text = Application.ProductName;
+            NotifyMenuRestaurar.Text = "Minimizar";
+            notifyIcon1.Icon = this.Icon;
+            notifyIcon1.Visible = true;
+            this.ShowInTaskbar = false;
+
             var s = "";
             if (ActivoDesde.Year > 2020)
                 s = $"-{ActivoDesde.Year}";
@@ -164,6 +171,9 @@ namespace Reloj_Windows
             MySettings.vHeight = tamVentana.Height;
 
             MySettings.Save();
+
+            try { notifyIcon1.Visible = false; }
+            catch { }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -193,6 +203,11 @@ namespace Reloj_Windows
         private void Form1_Resize(object sender, EventArgs e)
         {
             if (inicializando) return;
+
+            if (this.WindowState == FormWindowState.Normal)
+                NotifyMenuRestaurar.Text = "Minimizar";
+            else
+                NotifyMenuRestaurar.Text = "Restaurar";
 
             // Solo guardar la posición y tamaño si está en modo normal
             // no está como salvapantallas ni está acoplado
@@ -763,6 +778,25 @@ Y esto es casi todo... creo... en el menú de opciones (en el botón que hay aba
 ¡Disfrútala! :-)" + msgVersion;
             MessageBox.Show(msg, titulo, 
                             MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void NotifyMenuCerrar_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void NotifyMenuRestaurar_Click(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                NotifyMenuRestaurar.Text = "Restaurar";
+                this.WindowState = FormWindowState.Minimized;
+            }
+            else
+            {
+                NotifyMenuRestaurar.Text = "Minimizar";
+                this.WindowState = FormWindowState.Normal;
+            }
         }
     }
 }

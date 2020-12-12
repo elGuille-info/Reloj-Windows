@@ -55,8 +55,14 @@ namespace Reloj_Windows
             this.mnuCerrar = new System.Windows.Forms.ToolStripMenuItem();
             this.timerActualizarFechaHora = new System.Windows.Forms.Timer(this.components);
             this.timerSalvaPantalla = new System.Windows.Forms.Timer(this.components);
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.notifyContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.NotifyMenuRestaurar = new System.Windows.Forms.ToolStripMenuItem();
+            this.NotifySeparator = new System.Windows.Forms.ToolStripSeparator();
+            this.NotifyMenuCerrar = new System.Windows.Forms.ToolStripMenuItem();
             this.panelCentro.SuspendLayout();
             this.statusStrip1.SuspendLayout();
+            this.notifyContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // panelCentro
@@ -304,18 +310,55 @@ namespace Reloj_Windows
             // 
             this.timerSalvaPantalla.Tick += new System.EventHandler(this.TimerSalvaPantalla_Tick);
             // 
-            // Form1
+            // notifyIcon1
+            // 
+            this.notifyIcon1.ContextMenuStrip = this.notifyContextMenu;
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // notifyContextMenu
+            // 
+            this.notifyContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NotifyMenuRestaurar,
+            this.NotifySeparator,
+            this.NotifyMenuCerrar});
+            this.notifyContextMenu.Name = "notifyContextMenu";
+            this.notifyContextMenu.Size = new System.Drawing.Size(124, 54);
+            // 
+            // NotifyMenuRestaurar
+            // 
+            this.NotifyMenuRestaurar.Image = ((System.Drawing.Image)(resources.GetObject("NotifyMenuRestaurar.Image")));
+            this.NotifyMenuRestaurar.Name = "NotifyMenuRestaurar";
+            this.NotifyMenuRestaurar.Size = new System.Drawing.Size(123, 22);
+            this.NotifyMenuRestaurar.Text = "Restaurar";
+            this.NotifyMenuRestaurar.Click += new System.EventHandler(this.NotifyMenuRestaurar_Click);
+            // 
+            // NotifySeparator
+            // 
+            this.NotifySeparator.Name = "NotifySeparator";
+            this.NotifySeparator.Size = new System.Drawing.Size(120, 6);
+            // 
+            // NotifyMenuCerrar
+            // 
+            this.NotifyMenuCerrar.Image = ((System.Drawing.Image)(resources.GetObject("NotifyMenuCerrar.Image")));
+            this.NotifyMenuCerrar.Name = "NotifyMenuCerrar";
+            this.NotifyMenuCerrar.Size = new System.Drawing.Size(123, 22);
+            this.NotifyMenuCerrar.Text = "Cerrar";
+            this.NotifyMenuCerrar.Click += new System.EventHandler(this.NotifyMenuCerrar_Click);
+            // 
+            // FormReloj
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(804, 450);
             this.Controls.Add(this.panelCentro);
             this.Controls.Add(this.statusStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(350, 180);
-            this.Name = "Form1";
+            this.Name = "FormReloj";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reloj Windows (C#)";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -326,6 +369,7 @@ namespace Reloj_Windows
             this.panelCentro.ResumeLayout(false);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
+            this.notifyContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,6 +404,11 @@ namespace Reloj_Windows
         private System.Windows.Forms.ToolStripMenuItem mnuTamañoPequeño;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip notifyContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem NotifyMenuRestaurar;
+        private System.Windows.Forms.ToolStripSeparator NotifySeparator;
+        private System.Windows.Forms.ToolStripMenuItem NotifyMenuCerrar;
     }
 }
 
