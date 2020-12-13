@@ -166,5 +166,17 @@ namespace Reloj_Windows.Properties {
                 this["OpacidadAcopleySalvaP"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool TamañoPequeño {
+            get {
+                return ((bool)(this["TamañoPequeño"]));
+            }
+            set {
+                this["TamañoPequeño"] = value;
+            }
+        }
     }
 }

@@ -37,22 +37,22 @@ namespace Reloj_Windows
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.LabelInfo = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnSplitDrop = new System.Windows.Forms.ToolStripDropDownButton();
-            this.mnu01AcoplarDer = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu02AcoplarIzq = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu03AcoplarMinimo = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu04AcoplarTransparente = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu05toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu06TamañoPequeño = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu07toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu08RecordarPosicion = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu09TopMost = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu10toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu11Salvapantalla = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAcoplarDer = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAcoplarIzq = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAcoplarMinimo = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuAcoplarTransparente = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnutoolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuTamañoPequeño = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnutoolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuRecordarPosicion = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuTopMost = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnutoolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuSalvapantalla = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuOpacidad = new System.Windows.Forms.ToolStripMenuItem();
             this.cboOpacidad = new System.Windows.Forms.ToolStripComboBox();
-            this.mnu12toolSeparatorCerrar = new System.Windows.Forms.ToolStripSeparator();
-            this.mnu13AcercaDe = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnu14Cerrar = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnutoolSeparatorCerrar = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuAcercaDe = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuCerrar = new System.Windows.Forms.ToolStripMenuItem();
             this.timerActualizarFechaHora = new System.Windows.Forms.Timer(this.components);
             this.timerSalvaPantalla = new System.Windows.Forms.Timer(this.components);
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
@@ -105,9 +105,9 @@ namespace Reloj_Windows
             this.labelFecha.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.labelFecha.Font = new System.Drawing.Font("Consolas", 37F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.labelFecha.ForeColor = System.Drawing.Color.Lime;
-            this.labelFecha.Location = new System.Drawing.Point(0, 363);
+            this.labelFecha.Location = new System.Drawing.Point(0, 364);
             this.labelFecha.Name = "labelFecha";
-            this.labelFecha.Size = new System.Drawing.Size(804, 55);
+            this.labelFecha.Size = new System.Drawing.Size(804, 54);
             this.labelFecha.TabIndex = 1;
             this.labelFecha.Text = "miércoles, 02 diciembre 2020";
             this.labelFecha.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -147,21 +147,21 @@ namespace Reloj_Windows
             // 
             this.btnSplitDrop.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.btnSplitDrop.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnu01AcoplarDer,
-            this.mnu02AcoplarIzq,
-            this.mnu03AcoplarMinimo,
-            this.mnu04AcoplarTransparente,
-            this.mnu05toolStripSeparator1,
-            this.mnu06TamañoPequeño,
-            this.mnu07toolStripSeparator2,
-            this.mnu08RecordarPosicion,
-            this.mnu09TopMost,
-            this.mnu10toolStripSeparator3,
-            this.mnu11Salvapantalla,
+            this.mnuAcoplarDer,
+            this.mnuAcoplarIzq,
+            this.mnuAcoplarMinimo,
+            this.mnuAcoplarTransparente,
+            this.mnutoolStripSeparator1,
+            this.mnuTamañoPequeño,
+            this.mnutoolStripSeparator2,
+            this.mnuRecordarPosicion,
+            this.mnuTopMost,
+            this.mnutoolStripSeparator3,
+            this.mnuSalvapantalla,
             this.mnuOpacidad,
-            this.mnu12toolSeparatorCerrar,
-            this.mnu13AcercaDe,
-            this.mnu14Cerrar});
+            this.mnutoolSeparatorCerrar,
+            this.mnuAcercaDe,
+            this.mnuCerrar});
             this.btnSplitDrop.ForeColor = System.Drawing.Color.AliceBlue;
             this.btnSplitDrop.Image = ((System.Drawing.Image)(resources.GetObject("btnSplitDrop.Image")));
             this.btnSplitDrop.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -170,88 +170,88 @@ namespace Reloj_Windows
             this.btnSplitDrop.Text = "toolStripDropDownButton1";
             this.btnSplitDrop.DropDownOpening += new System.EventHandler(this.BtnSplitDrop_DropDownOpening);
             // 
-            // mnu01AcoplarDer
+            // mnuAcoplarDer
             // 
-            this.mnu01AcoplarDer.Name = "mnu01AcoplarDer";
-            this.mnu01AcoplarDer.Size = new System.Drawing.Size(281, 22);
-            this.mnu01AcoplarDer.Text = "Acoplar en la derecha";
-            this.mnu01AcoplarDer.ToolTipText = "Acoplar arriba a la derecha";
-            this.mnu01AcoplarDer.Click += new System.EventHandler(this.MnuAcoplarDer_Click);
+            this.mnuAcoplarDer.Name = "mnuAcoplarDer";
+            this.mnuAcoplarDer.Size = new System.Drawing.Size(281, 22);
+            this.mnuAcoplarDer.Text = "Acoplar en la derecha";
+            this.mnuAcoplarDer.ToolTipText = "Acoplar arriba a la derecha";
+            this.mnuAcoplarDer.Click += new System.EventHandler(this.MnuAcoplarDer_Click);
             // 
-            // mnu02AcoplarIzq
+            // mnuAcoplarIzq
             // 
-            this.mnu02AcoplarIzq.Name = "mnu02AcoplarIzq";
-            this.mnu02AcoplarIzq.Size = new System.Drawing.Size(281, 22);
-            this.mnu02AcoplarIzq.Text = "Acoplar en la izquierda";
-            this.mnu02AcoplarIzq.ToolTipText = "Acoplar arriba a la izquierda";
-            this.mnu02AcoplarIzq.Click += new System.EventHandler(this.MnuAcoplarIzq_Click);
+            this.mnuAcoplarIzq.Name = "mnuAcoplarIzq";
+            this.mnuAcoplarIzq.Size = new System.Drawing.Size(281, 22);
+            this.mnuAcoplarIzq.Text = "Acoplar en la izquierda";
+            this.mnuAcoplarIzq.ToolTipText = "Acoplar arriba a la izquierda";
+            this.mnuAcoplarIzq.Click += new System.EventHandler(this.MnuAcoplarIzq_Click);
             // 
-            // mnu03AcoplarMinimo
+            // mnuAcoplarMinimo
             // 
-            this.mnu03AcoplarMinimo.Checked = true;
-            this.mnu03AcoplarMinimo.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnu03AcoplarMinimo.Name = "mnu03AcoplarMinimo";
-            this.mnu03AcoplarMinimo.Size = new System.Drawing.Size(281, 22);
-            this.mnu03AcoplarMinimo.Text = "Al acoplar hacerlo al tamaño mínimo";
-            this.mnu03AcoplarMinimo.Click += new System.EventHandler(this.MnuAcoplarMinimo_Click);
+            this.mnuAcoplarMinimo.Checked = true;
+            this.mnuAcoplarMinimo.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuAcoplarMinimo.Name = "mnuAcoplarMinimo";
+            this.mnuAcoplarMinimo.Size = new System.Drawing.Size(281, 22);
+            this.mnuAcoplarMinimo.Text = "Al acoplar hacerlo al tamaño mínimo";
+            this.mnuAcoplarMinimo.Click += new System.EventHandler(this.MnuAcoplarMinimo_Click);
             // 
-            // mnu04AcoplarTransparente
+            // mnuAcoplarTransparente
             // 
-            this.mnu04AcoplarTransparente.Name = "mnu04AcoplarTransparente";
-            this.mnu04AcoplarTransparente.Size = new System.Drawing.Size(281, 22);
-            this.mnu04AcoplarTransparente.Text = "Al acoplar ponerlo transparente (75%)";
-            this.mnu04AcoplarTransparente.Click += new System.EventHandler(this.MnuAcoplarTransparente_Click);
+            this.mnuAcoplarTransparente.Name = "mnuAcoplarTransparente";
+            this.mnuAcoplarTransparente.Size = new System.Drawing.Size(281, 22);
+            this.mnuAcoplarTransparente.Text = "Al acoplar ponerlo transparente (75%)";
+            this.mnuAcoplarTransparente.Click += new System.EventHandler(this.MnuAcoplarTransparente_Click);
             // 
-            // mnu05toolStripSeparator1
+            // mnutoolStripSeparator1
             // 
-            this.mnu05toolStripSeparator1.Name = "mnu05toolStripSeparator1";
-            this.mnu05toolStripSeparator1.Size = new System.Drawing.Size(278, 6);
+            this.mnutoolStripSeparator1.Name = "mnutoolStripSeparator1";
+            this.mnutoolStripSeparator1.Size = new System.Drawing.Size(278, 6);
             // 
-            // mnu06TamañoPequeño
+            // mnuTamañoPequeño
             // 
-            this.mnu06TamañoPequeño.Name = "mnu06TamañoPequeño";
-            this.mnu06TamañoPequeño.Size = new System.Drawing.Size(281, 22);
-            this.mnu06TamañoPequeño.Text = "Cambiar al tamaño a pequeño";
-            this.mnu06TamañoPequeño.ToolTipText = "Marca esta casilla para mostrar la ventana a tamaño pequeño\r\nsi no está marcada s" +
+            this.mnuTamañoPequeño.Name = "mnuTamañoPequeño";
+            this.mnuTamañoPequeño.Size = new System.Drawing.Size(281, 22);
+            this.mnuTamañoPequeño.Text = "Cambiar al tamaño a pequeño";
+            this.mnuTamañoPequeño.ToolTipText = "Marca esta casilla para mostrar la ventana a tamaño pequeño\r\nsi no está marcada s" +
     "e usará el tamaño que ajustes";
-            this.mnu06TamañoPequeño.Click += new System.EventHandler(this.mnuTamañoPequeño_Click);
+            this.mnuTamañoPequeño.Click += new System.EventHandler(this.mnuTamañoPequeño_Click);
             // 
-            // mnu07toolStripSeparator2
+            // mnutoolStripSeparator2
             // 
-            this.mnu07toolStripSeparator2.Name = "mnu07toolStripSeparator2";
-            this.mnu07toolStripSeparator2.Size = new System.Drawing.Size(278, 6);
+            this.mnutoolStripSeparator2.Name = "mnutoolStripSeparator2";
+            this.mnutoolStripSeparator2.Size = new System.Drawing.Size(278, 6);
             // 
-            // mnu08RecordarPosicion
+            // mnuRecordarPosicion
             // 
-            this.mnu08RecordarPosicion.Checked = true;
-            this.mnu08RecordarPosicion.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mnu08RecordarPosicion.Name = "mnu08RecordarPosicion";
-            this.mnu08RecordarPosicion.Size = new System.Drawing.Size(281, 22);
-            this.mnu08RecordarPosicion.Text = "Recordar la posición y tamaño al iniciar";
-            this.mnu08RecordarPosicion.Click += new System.EventHandler(this.mnuRecordarPosicion_Click);
+            this.mnuRecordarPosicion.Checked = true;
+            this.mnuRecordarPosicion.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.mnuRecordarPosicion.Name = "mnuRecordarPosicion";
+            this.mnuRecordarPosicion.Size = new System.Drawing.Size(281, 22);
+            this.mnuRecordarPosicion.Text = "Recordar la posición y tamaño al iniciar";
+            this.mnuRecordarPosicion.Click += new System.EventHandler(this.mnuRecordarPosicion_Click);
             // 
-            // mnu09TopMost
+            // mnuTopMost
             // 
-            this.mnu09TopMost.Name = "mnu09TopMost";
-            this.mnu09TopMost.Size = new System.Drawing.Size(281, 22);
-            this.mnu09TopMost.Text = "Siempre encima";
-            this.mnu09TopMost.Click += new System.EventHandler(this.mnuTopMost_Click);
+            this.mnuTopMost.Name = "mnuTopMost";
+            this.mnuTopMost.Size = new System.Drawing.Size(281, 22);
+            this.mnuTopMost.Text = "Siempre encima";
+            this.mnuTopMost.Click += new System.EventHandler(this.mnuTopMost_Click);
             // 
-            // mnu10toolStripSeparator3
+            // mnutoolStripSeparator3
             // 
-            this.mnu10toolStripSeparator3.Name = "mnu10toolStripSeparator3";
-            this.mnu10toolStripSeparator3.Size = new System.Drawing.Size(278, 6);
+            this.mnutoolStripSeparator3.Name = "mnutoolStripSeparator3";
+            this.mnutoolStripSeparator3.Size = new System.Drawing.Size(278, 6);
             // 
-            // mnu11Salvapantalla
+            // mnuSalvapantalla
             // 
-            this.mnu11Salvapantalla.Name = "mnu11Salvapantalla";
-            this.mnu11Salvapantalla.ShortcutKeyDisplayString = "Ctrl+Shit+P";
-            this.mnu11Salvapantalla.Size = new System.Drawing.Size(281, 22);
-            this.mnu11Salvapantalla.Text = "Iniciar salvapantalla";
-            this.mnu11Salvapantalla.ToolTipText = "No sustituye a ningún salvapantalla, \r\nsimplemente desplaza la ventana por la pan" +
+            this.mnuSalvapantalla.Name = "mnuSalvapantalla";
+            this.mnuSalvapantalla.ShortcutKeyDisplayString = "Ctrl+Shit+P";
+            this.mnuSalvapantalla.Size = new System.Drawing.Size(281, 22);
+            this.mnuSalvapantalla.Text = "Iniciar salvapantalla";
+            this.mnuSalvapantalla.ToolTipText = "No sustituye a ningún salvapantalla, \r\nsimplemente desplaza la ventana por la pan" +
     "talla.\r\nPara detenerlo haz doble-clic en la fecha o la hora.\r\nPulsa Ctrl+Shit+P " +
     "para iniciarlo o detenerlo.";
-            this.mnu11Salvapantalla.Click += new System.EventHandler(this.mnuSalvapantalla_Click);
+            this.mnuSalvapantalla.Click += new System.EventHandler(this.mnuSalvapantalla_Click);
             // 
             // mnuOpacidad
             // 
@@ -280,27 +280,27 @@ namespace Reloj_Windows
     "a no transparente)";
             this.cboOpacidad.SelectedIndexChanged += new System.EventHandler(this.CboOpacidad_SelectedIndexChanged);
             // 
-            // mnu12toolSeparatorCerrar
+            // mnutoolSeparatorCerrar
             // 
-            this.mnu12toolSeparatorCerrar.Name = "mnu12toolSeparatorCerrar";
-            this.mnu12toolSeparatorCerrar.Size = new System.Drawing.Size(278, 6);
+            this.mnutoolSeparatorCerrar.Name = "mnutoolSeparatorCerrar";
+            this.mnutoolSeparatorCerrar.Size = new System.Drawing.Size(278, 6);
             // 
-            // mnu13AcercaDe
+            // mnuAcercaDe
             // 
-            this.mnu13AcercaDe.Image = ((System.Drawing.Image)(resources.GetObject("mnu13AcercaDe.Image")));
-            this.mnu13AcercaDe.Name = "mnu13AcercaDe";
-            this.mnu13AcercaDe.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.mnu13AcercaDe.Size = new System.Drawing.Size(281, 22);
-            this.mnu13AcercaDe.Text = "Acerca de...";
-            this.mnu13AcercaDe.Click += new System.EventHandler(this.MnuAcercaDe_Click);
+            this.mnuAcercaDe.Image = ((System.Drawing.Image)(resources.GetObject("mnuAcercaDe.Image")));
+            this.mnuAcercaDe.Name = "mnuAcercaDe";
+            this.mnuAcercaDe.ShortcutKeys = System.Windows.Forms.Keys.F1;
+            this.mnuAcercaDe.Size = new System.Drawing.Size(281, 22);
+            this.mnuAcercaDe.Text = "Acerca de...";
+            this.mnuAcercaDe.Click += new System.EventHandler(this.MnuAcercaDe_Click);
             // 
-            // mnu14Cerrar
+            // mnuCerrar
             // 
-            this.mnu14Cerrar.Image = ((System.Drawing.Image)(resources.GetObject("mnu14Cerrar.Image")));
-            this.mnu14Cerrar.Name = "mnu14Cerrar";
-            this.mnu14Cerrar.Size = new System.Drawing.Size(281, 22);
-            this.mnu14Cerrar.Text = "Cerrar el programa";
-            this.mnu14Cerrar.Click += new System.EventHandler(this.MnuCerrar_Click);
+            this.mnuCerrar.Image = ((System.Drawing.Image)(resources.GetObject("mnuCerrar.Image")));
+            this.mnuCerrar.Name = "mnuCerrar";
+            this.mnuCerrar.Size = new System.Drawing.Size(281, 22);
+            this.mnuCerrar.Text = "Cerrar el programa";
+            this.mnuCerrar.Click += new System.EventHandler(this.MnuCerrar_Click);
             // 
             // timerActualizarFechaHora
             // 
@@ -377,51 +377,35 @@ namespace Reloj_Windows
 
         #endregion
 
-        //private System.Windows.Forms.Panel panelAbajo;
-        //private System.Windows.Forms.Label labelInfo;
         private System.Windows.Forms.Panel panelCentro;
         private System.Windows.Forms.Label labelHora;
         private System.Windows.Forms.Label labelFecha;
-        //private System.Windows.Forms.Button btnOpciones;
         private System.Windows.Forms.Timer timerActualizarFechaHora;
         private System.Windows.Forms.Timer timerSalvaPantalla;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel LabelInfo;
         private System.Windows.Forms.ToolStripDropDownButton btnSplitDrop;
-        //private System.Windows.Forms.ToolStripMenuItem mnuAcoplarIzq;
-        private System.Windows.Forms.ToolStripMenuItem mnu01AcoplarDer;
-        //private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        //private System.Windows.Forms.ToolStripMenuItem mnuRecordarPosicion;
-        //private System.Windows.Forms.ToolStripMenuItem mnuTopMost;
-        //private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnuAcoplarDer;
         private System.Windows.Forms.ToolStripComboBox cboOpacidad;
-        //private System.Windows.Forms.ToolStripMenuItem mnuAcoplarMinimo;
-        //private System.Windows.Forms.ToolStripSeparator toolSeparatorCerrar;
-        //private System.Windows.Forms.ToolStripMenuItem mnuCerrar;
-        //private System.Windows.Forms.ToolStripMenuItem mnuSalvapantalla;
         private System.Windows.Forms.ToolStripMenuItem mnuOpacidad;
-        //private System.Windows.Forms.ToolStripMenuItem mnuAcoplarTransparente;
-        //private System.Windows.Forms.ToolStripMenuItem mnuTamañoPequeño;
-        //private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        //private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip notifyContextMenu;
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuRestaurar;
         private System.Windows.Forms.ToolStripSeparator NotifySeparator;
         private System.Windows.Forms.ToolStripMenuItem NotifyMenuCerrar;
-        private System.Windows.Forms.ToolStripMenuItem mnu02AcoplarIzq;
-        private System.Windows.Forms.ToolStripMenuItem mnu03AcoplarMinimo;
-        private System.Windows.Forms.ToolStripMenuItem mnu04AcoplarTransparente;
-        private System.Windows.Forms.ToolStripSeparator mnu05toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem mnu06TamañoPequeño;
-        private System.Windows.Forms.ToolStripSeparator mnu07toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem mnu08RecordarPosicion;
-        private System.Windows.Forms.ToolStripMenuItem mnu09TopMost;
-        private System.Windows.Forms.ToolStripSeparator mnu10toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem mnu11Salvapantalla;
-        private System.Windows.Forms.ToolStripSeparator mnu12toolSeparatorCerrar;
-        private System.Windows.Forms.ToolStripMenuItem mnu13AcercaDe;
-        private System.Windows.Forms.ToolStripMenuItem mnu14Cerrar;
+        private System.Windows.Forms.ToolStripMenuItem mnuAcoplarIzq;
+        private System.Windows.Forms.ToolStripMenuItem mnuAcoplarMinimo;
+        private System.Windows.Forms.ToolStripMenuItem mnuAcoplarTransparente;
+        private System.Windows.Forms.ToolStripSeparator mnutoolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem mnuTamañoPequeño;
+        private System.Windows.Forms.ToolStripSeparator mnutoolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem mnuRecordarPosicion;
+        private System.Windows.Forms.ToolStripMenuItem mnuTopMost;
+        private System.Windows.Forms.ToolStripSeparator mnutoolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem mnuSalvapantalla;
+        private System.Windows.Forms.ToolStripSeparator mnutoolSeparatorCerrar;
+        private System.Windows.Forms.ToolStripMenuItem mnuAcercaDe;
+        private System.Windows.Forms.ToolStripMenuItem mnuCerrar;
     }
 }
 

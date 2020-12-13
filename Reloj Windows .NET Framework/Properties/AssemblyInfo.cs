@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Reloj Windows .NET 4.8")]
-[assembly: AssemblyDescription("Reloj Windows es una aplicación que muestra la fecha y hora y se puede usar casi como un salvapantalla. Permite acoplarlo a la parte superior derecha o izquierda.  (para .NET Framework 4.8 revisión del 05-dic-2020)")]
+[assembly: AssemblyDescription("Reloj Windows es una aplicación que muestra la fecha y hora y se puede usar casi como un salvapantalla. Permite acoplarlo a la parte superior derecha o izquierda.  (para .NET Framework 4.8 revisión del 13-dic-2020)")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("elGuille")]
 [assembly: AssemblyProduct("Reloj Windows .NET 4.8")]
@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.1")]
+[assembly: AssemblyFileVersion("1.0.0.12")]
