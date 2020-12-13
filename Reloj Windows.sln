@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reloj Windows", "Reloj Wind
 EndProject
 Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "Reloj Windows vb", "Reloj Windows vb\Reloj Windows vb.vbproj", "{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "gsNotasNETF", "..\..\gsNotasNETF\gsNotasNETF\gsNotasNETF.csproj", "{F173E292-0B08-4903-849D-D145295AF938}"
-EndProject
-Project("{778DAE3C-4631-46EA-AA77-85C1314464D9}") = "gsUtilidadesNET", "..\gsUtilidadesNET\gsUtilidadesNET\gsUtilidadesNET.vbproj", "{0D443A57-93D5-4E68-89F9-1D0C6D514885}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,30 +41,6 @@ Global
 		{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}.Release|x64.Build.0 = Release|Any CPU
 		{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}.Release|x86.ActiveCfg = Release|Any CPU
 		{802504CB-0D5A-463A-BA3A-DBF1C6676BA7}.Release|x86.Build.0 = Release|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Debug|x64.Build.0 = Debug|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Debug|x86.Build.0 = Debug|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Release|x64.ActiveCfg = Release|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Release|x64.Build.0 = Release|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Release|x86.ActiveCfg = Release|Any CPU
-		{F173E292-0B08-4903-849D-D145295AF938}.Release|x86.Build.0 = Release|Any CPU
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Debug|x64.ActiveCfg = Debug|x64
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Debug|x64.Build.0 = Debug|x64
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Debug|x86.ActiveCfg = Debug|x86
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Debug|x86.Build.0 = Debug|x86
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Release|x64.ActiveCfg = Release|x64
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Release|x64.Build.0 = Release|x64
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Release|x86.ActiveCfg = Release|x86
-		{0D443A57-93D5-4E68-89F9-1D0C6D514885}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

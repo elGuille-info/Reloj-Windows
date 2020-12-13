@@ -12,7 +12,7 @@ Namespace Reloj_Windows.Properties
 
     <Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute()>
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")>
-    Friend NotInheritable Partial Class Settings
+    Partial Friend NotInheritable Class Settings
         Inherits Global.System.Configuration.ApplicationSettingsBase
         Private Shared defaultInstance As Settings = CType(Global.System.Configuration.ApplicationSettingsBase.Synchronized(New Settings), Settings)
         Public Shared ReadOnly Property [Default] As Settings
@@ -20,6 +20,7 @@ Namespace Reloj_Windows.Properties
                 Return defaultInstance
             End Get
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("True")>
@@ -29,9 +30,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Boolean)
-                Me("RecordarPos") = value
+                Me("RecordarPos") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("-1")>
@@ -41,9 +43,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Integer)
-                Me("AcoplarDonde") = value
+                Me("AcoplarDonde") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("100")>
@@ -53,9 +56,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Double)
-                Me("Opacidad") = value
+                Me("Opacidad") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("-1")>
@@ -65,9 +69,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Integer)
-                Me("vLeft") = value
+                Me("vLeft") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("-1")>
@@ -77,9 +82,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Integer)
-                Me("vTop") = value
+                Me("vTop") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("-1")>
@@ -89,9 +95,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Integer)
-                Me("vWidth") = value
+                Me("vWidth") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("-1")>
@@ -101,9 +108,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Integer)
-                Me("vHeight") = value
+                Me("vHeight") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("False")>
@@ -113,9 +121,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Boolean)
-                Me("SiempreEncima") = value
+                Me("SiempreEncima") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("True")>
@@ -125,9 +134,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Boolean)
-                Me("AcoplarMinimo") = value
+                Me("AcoplarMinimo") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("False")>
@@ -137,9 +147,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Boolean)
-                Me("UsarComoSalvaPantalla") = value
+                Me("UsarComoSalvaPantalla") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("False")>
@@ -149,9 +160,10 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Boolean)
-                Me("AcoplarTransparente") = value
+                Me("AcoplarTransparente") = Value
             End Set
         End Property
+
         <Global.System.Configuration.UserScopedSettingAttribute()>
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
         <Global.System.Configuration.DefaultSettingValueAttribute("0.75")>
@@ -161,8 +173,21 @@ Namespace Reloj_Windows.Properties
             End Get
 
             Set(Value As Double)
-                Me("OpacidadAcopleySalvaP") = value
+                Me("OpacidadAcopleySalvaP") = Value
             End Set
         End Property
+
+        <Global.System.Configuration.UserScopedSettingAttribute()>
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>
+        <Global.System.Configuration.DefaultSettingValueAttribute("False")>
+        Public Property TamañoPequeño As Boolean
+            Get
+                Return (CBool(Me("TamañoPequeño")))
+            End Get
+            Set(Value As Boolean)
+                Me("TamañoPequeño") = Value
+            End Set
+        End Property
+
     End Class
 End Namespace

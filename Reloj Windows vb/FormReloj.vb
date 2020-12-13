@@ -132,6 +132,23 @@ Namespace Reloj_Windows
             NotifyIcon1.Text = Application.ProductName
             NotifyMenuRestaurar.Text = "Minimizar"
             NotifyIcon1.Icon = Me.Icon
+
+            ' Añadir los menús de la aplicación al contextMenu
+            ' Quito el menú de cerrar porque ya está en el otro
+            NotifyContextMenu.Items.Remove(NotifyMenuCerrar)
+
+            ' hay que añadirlos uno a uno... para asignar el método de evento
+            NotifyContextMenu.Items.Add(mnuAcoplarDer.Clonar(AddressOf MnuAcoplarDer_Click))
+            NotifyContextMenu.Items.Add(mnuAcoplarIzq.Clonar(AddressOf MnuAcoplarIzq_Click))
+            NotifyContextMenu.Items.Add(mnuAcoplarMinimo.Clonar(AddressOf MnuAcoplarMinimo_Click))
+            NotifyContextMenu.Items.Add(mnuAcoplarTransparente.Clonar(AddressOf MnuAcoplarTransparente_Click))
+            NotifyContextMenu.Items.Add(New ToolStripSeparator())
+            NotifyContextMenu.Items.Add(mnuTamañoPequeño.Clonar(AddressOf MnuTamañoPequeño_Click))
+            NotifyContextMenu.Items.Add(New ToolStripSeparator())
+            NotifyContextMenu.Items.Add(mnuTopMost.Clonar(AddressOf MnuTopMost_Click))
+            NotifyContextMenu.Items.Add(New ToolStripSeparator())
+            NotifyContextMenu.Items.Add(NotifyMenuCerrar)
+
             NotifyIcon1.Visible = True
             Me.ShowInTaskbar = False
 
@@ -417,11 +434,21 @@ Namespace Reloj_Windows
             Me.FormBorderStyle = FormBorderStyle.Sizable
             Me.Opacity = opacidadAnt
 
-            ' Posicionarlo donde estaba
-            Me.Left = tamVentana.Left
-            Me.Top = tamVentana.Top
-            Me.Width = tamVentana.Width
-            Me.Height = tamVentana.Height
+            If mnuTamañoPequeño.Checked Then
+                '' Posicionarlo donde estaba
+                'Me.Left = tamVentana.Left
+                'Me.Top = tamVentana.Top
+                'Me.Width = tamVentana.Width
+                'Me.Height = tamVentana.Height
+
+                Me.Left = tamAnt.Left
+                If (Me.Left > Screen.PrimaryScreen.WorkingArea.Width - Me.Width) Then
+                    Me.Left = Screen.PrimaryScreen.WorkingArea.Width - Me.Width
+                End If
+                Me.Top = tamAnt.Top
+                Me.Width = tamAnt.Width
+                Me.Height = tamAnt.Height
+            End If
 
             salvaPantallaActivo = False
 
@@ -471,8 +498,13 @@ Namespace Reloj_Windows
             mnuRecordarPosicion.Checked = MySettings.RecordarPos
             mnuTopMost.Checked = MySettings.SiempreEncima
             mnuAcoplarTransparente.Checked = MySettings.AcoplarTransparente
+            mnuTamañoPequeño.Checked = MySettings.TamañoPequeño
 
             AcoplarVentana(acoplarDonde)
+
+            If MySettings.TamañoPequeño Then
+                PonerTamañoAcoplar(True)
+            End If
 
             LabelInfo.ToolTipText = $"Activo desde {ActivoDesde:HH:mm:ss dd.MMMyyyy}"
             btnSplitDrop.ToolTipText = $"{Me.Location} {Me.Size}".Replace("X", "L").Replace("Y", "T")
@@ -568,25 +600,36 @@ Namespace Reloj_Windows
         Private Sub MnuAcoplarDer_Click(sender As Object, e As EventArgs) Handles mnuAcoplarDer.Click
             If inicializando Then Return
 
-            mnuAcoplarDer.Checked = Not mnuAcoplarDer.Checked
+            Dim mnu = TryCast(sender, ToolStripMenuItem)
+            mnu.Checked = Not mnu.Checked
+
+            mnuAcoplarDer.Checked = mnu.Checked ' Not mnuAcoplarDer.Checked
             ' Acoplar a la derecha
             If mnuAcoplarDer.Checked Then
                 AcoplarVentana(True)
             Else
                 AcoplarVentana(Nothing)
             End If
+
+            TryCast(NotifyContextMenu.Items(mnu.Name), ToolStripMenuItem).Checked = mnu.Checked
+
         End Sub
 
         Private Sub MnuAcoplarIzq_Click(sender As Object, e As EventArgs) Handles mnuAcoplarIzq.Click
             If inicializando Then Return
 
-            mnuAcoplarIzq.Checked = Not mnuAcoplarIzq.Checked
+            Dim mnu = TryCast(sender, ToolStripMenuItem)
+            mnu.Checked = Not mnu.Checked
+
+            mnuAcoplarIzq.Checked = mnu.Checked ' Not mnuAcoplarIzq.Checked
             ' Acoplar arriba a la izquierda
             If mnuAcoplarIzq.Checked Then
                 AcoplarVentana(False)
             Else
                 AcoplarVentana(Nothing)
             End If
+
+            TryCast(NotifyContextMenu.Items(mnu.Name), ToolStripMenuItem).Checked = mnu.Checked
         End Sub
 
         Private Sub CboOpacidad_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboOpacidad.SelectedIndexChanged
@@ -633,18 +676,28 @@ Namespace Reloj_Windows
         Private Sub MnuTopMost_Click(sender As Object, e As EventArgs) Handles mnuTopMost.Click
             If inicializando Then Return
 
-            mnuTopMost.Checked = Not mnuTopMost.Checked
+            Dim mnu = TryCast(sender, ToolStripMenuItem)
+            mnu.Checked = Not mnu.Checked
+
+            mnuTopMost.Checked = mnu.Checked ' Not mnuTopMost.Checked
 
             Me.TopMost = mnuTopMost.Checked
             MySettings.SiempreEncima = Me.TopMost
+
+            TryCast(NotifyContextMenu.Items(mnu.Name), ToolStripMenuItem).Checked = mnu.Checked
         End Sub
 
         Private Sub MnuAcoplarMinimo_Click(sender As Object, e As EventArgs) Handles mnuAcoplarMinimo.Click
             If inicializando Then Return
 
-            mnuAcoplarMinimo.Checked = Not mnuAcoplarMinimo.Checked
+            Dim mnu = TryCast(sender, ToolStripMenuItem)
+            mnu.Checked = Not mnu.Checked
+
+            mnuAcoplarMinimo.Checked = mnu.Checked ' Not mnuAcoplarMinimo.Checked
             MySettings.AcoplarMinimo = mnuAcoplarMinimo.Checked
             AcoplarVentana(acoplarDonde)
+
+            TryCast(NotifyContextMenu.Items(mnu.Name), ToolStripMenuItem).Checked = mnu.Checked
         End Sub
 
         Private Sub MnuCerrar_Click(sender As Object, e As EventArgs) Handles mnuCerrar.Click
@@ -665,15 +718,23 @@ Namespace Reloj_Windows
         Private Sub MnuAcoplarTransparente_Click(sender As Object, e As EventArgs) Handles mnuAcoplarTransparente.Click
             If inicializando Then Return
 
-            mnuAcoplarTransparente.Checked = Not mnuAcoplarTransparente.Checked
+            Dim mnu = TryCast(sender, ToolStripMenuItem)
+            mnu.Checked = Not mnu.Checked
+
+            mnuAcoplarTransparente.Checked = mnu.Checked ' Not mnuAcoplarTransparente.Checked
             MySettings.AcoplarTransparente = mnuAcoplarTransparente.Checked
             AcoplarVentana(acoplarDonde)
+
+            TryCast(NotifyContextMenu.Items(mnu.Name), ToolStripMenuItem).Checked = mnu.Checked
         End Sub
 
         Private Sub MnuTamañoPequeño_Click(sender As Object, e As EventArgs) Handles mnuTamañoPequeño.Click
             If inicializando Then Return
 
-            mnuTamañoPequeño.Checked = Not mnuTamañoPequeño.Checked
+            Dim mnu = TryCast(sender, ToolStripMenuItem)
+            mnu.Checked = Not mnu.Checked
+
+            mnuTamañoPequeño.Checked = mnu.Checked ' Not mnuTamañoPequeño.Checked
             If estabaAcoplada Then Return
 
             If mnuTamañoPequeño.Checked Then
@@ -684,6 +745,9 @@ Namespace Reloj_Windows
                 AjustarTamañoFechaHora()
                 inicializando = False
             End If
+
+            TryCast(NotifyContextMenu.Items(mnu.Name), ToolStripMenuItem).Checked = mnu.Checked
+            MySettings.TamañoPequeño = mnu.Checked
         End Sub
 
         Private Sub mnuAcercaDe_Click(sender As Object, e As EventArgs) Handles mnuAcercaDe.Click

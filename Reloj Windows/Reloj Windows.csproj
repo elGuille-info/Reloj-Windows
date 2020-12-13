@@ -5,27 +5,18 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <RootNamespace>Reloj_Windows</RootNamespace>
     <UseWindowsForms>true</UseWindowsForms>
-    <Version>1.0.0.11</Version>
+    <Version>1.0.0.12</Version>
     <Authors>Guillermo Som (elGuille)</Authors>
     <Company>elGuille</Company>
     <ApplicationIcon>Reloj Windows (Monitor.WinVista).ico</ApplicationIcon>
     <Description>Reloj Windows es una aplicación que muestra la fecha y hora y se puede usar casi como un salvapantalla. Permite acoplarlo a la parte superior derecha o izquierda.
 
-(para .NET 5.0 revisión del 12-dic-2010)
+(para .NET 5.0 revisión del 13-dic-2010)
 
-v1.0.0.11 (12-dic-20) Añado algunos menús del menú normal al icono de notificación.</Description>
-    <PackageReleaseNotes>v1.0.0.11 (12-dic-20) Añado algunos menús del menú normal al icono de notificación.
-v1.0.0.10 (12-dic-20) Añado un icono de notificación para que no se muestre la aplicación en la barra de tareas y sí el icono en el área de notificación.
-v1.0.0.9 (05-dic-20) Cambio el nombre del form y añado un método público para llamar al salvapantalla.
-v1.0.0.8 (05-dic-20) Usar Ctrl+Shift+P para activar / desactivar el salvapantalla.
-v1.0.0.7 (05-dic-20) Muestro también el valor de FileVersion por si se maniente una versión diferente a la versión del producto.
-v1.0.0.6 (05-dic-20) Algunos ajustes en los cambios de acoplado, tamaño mínimo, etc.
-v1.0.0.5 (05-dic-20) Añado comprobación de si la versión en mi sitio es la más reciente. En la aplicación de VB añado los manejadores de evento que la conversión de CSharToVB de Paul1956 no añade.
-v1.0.0.4 (04-dic-20) Convertido de C# a Visual Basic con CSharToVB de Paul1956.
-v1.0.0.3 (04-dic-20) Se puede indicar que se ponga en el tamaño más pequeño.
-v1.0.0.2 (04-dic-20) Comprobación para que la hora se ajuste bien con el alto.
-v1.0.0.1 (03-dic-20) Operativo con todas las características iniciales.
-v1.0.0.0 (02-dic-20) Primeras pruebas de funcionalidad,</PackageReleaseNotes>
+v1.0.0.12 (13-dic-20) Ahora se recuerda y usa si estaba mostrado a tamaño pequeño.</Description>
+    <PackageReleaseNotes>v1.0.0.12 (13-dic-20) Ahora se recuerda y usa si estaba mostrado a tamaño pequeño.
+v1.0.0.11 (12-dic-20) Añado algunos menús del menú normal al icono de notificación.
+v1.0.0.10 (12-dic-20) Añado un icono de notificación para que no se muestre la aplicación en la barra de tareas y sí el icono en el área de notificación.</PackageReleaseNotes>
     <NeutralLanguage>es-ES</NeutralLanguage>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>(c) Guillermo Som (elGuille), 2020</Copyright>

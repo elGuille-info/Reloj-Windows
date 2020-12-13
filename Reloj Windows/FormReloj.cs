@@ -130,9 +130,11 @@ namespace Reloj_Windows
             notifyIcon1.Text = Application.ProductName;
             NotifyMenuRestaurar.Text = "Minimizar";
             notifyIcon1.Icon = this.Icon;
-            //Añadir los menús de la aplicación al contextMenu
+
+            // Añadir los menús de la aplicación al contextMenu
             // Quito el menú de cerrar porque ya está en el otro
             notifyContextMenu.Items.Remove(NotifyMenuCerrar);
+
             // hay que añadirlos uno a uno... para asignar el método de evento
             notifyContextMenu.Items.Add(mnu01AcoplarDer.Clonar(MnuAcoplarDer_Click));
             notifyContextMenu.Items.Add(mnu02AcoplarIzq.Clonar(MnuAcoplarIzq_Click));
@@ -141,21 +143,10 @@ namespace Reloj_Windows
             notifyContextMenu.Items.Add(new ToolStripSeparator());
             notifyContextMenu.Items.Add(mnu06TamañoPequeño.Clonar(mnuTamañoPequeño_Click));
             notifyContextMenu.Items.Add(new ToolStripSeparator());
-            //notifyContextMenu.Items.Add(mnu08RecordarPosicion.Clonar(mnuRecordarPosicion_Click));
             notifyContextMenu.Items.Add(mnu09TopMost.Clonar(mnuTopMost_Click));
             notifyContextMenu.Items.Add(new ToolStripSeparator());
-            //notifyContextMenu.Items.Add(mnu11Salvapantalla.Clonar(mnuSalvapantalla_Click));
-            //notifyContextMenu.Items.Add(new ToolStripSeparator());
-            //notifyContextMenu.Items.Add(mnu13AcercaDe.Clonar(MnuAcercaDe_Click));
             notifyContextMenu.Items.Add(NotifyMenuCerrar);
 
-            for (var i = 0; i < btnSplitDrop.DropDownItems.Count; i++)
-            {
-                // Así no vale porque no se añaden todos 
-                // y no se pueden usar en los dos sitios.
-                //notifyContextMenu.Items.Add(btnSplitDrop.DropDownItems[i]);
-                //notifyContextMenu.Items.Add(btnSplitDrop.DropDownItems[i].Clonar(btnSplitDrop.DropDownItems[i]);
-            }
             notifyIcon1.Visible = true;
             this.ShowInTaskbar = false;
 
@@ -207,8 +198,6 @@ namespace Reloj_Windows
             // Ctrl+Shit+P inicia o cancela el salvapantalla
             if (!e.Alt && e.Shift && e.Control && e.KeyCode == Keys.P)
             {
-                //CancelarSalvapantalla();
-                //mnu11Salvapantalla_Click(null, null);
                 MostrarSalvapantalla(mnuSalvap);
                 e.Handled = true;
                 e.SuppressKeyPress = true;
@@ -325,10 +314,6 @@ namespace Reloj_Windows
 
             if (this.Height > 190)
             {
-                //// Si ya estaba acoplada, no asignar el tamaño
-                //if (!estabaAcoplada || mnu06TamañoPequeño.Checked)
-                //{
-                //}
                 labelFecha.Font = new Font(labelFecha.Font.FontFamily, 37, FontStyle.Bold);
                 labelFecha.Height = 55;
                 labelHora.Height = this.ClientSize.Height - labelFecha.Height - statusStrip1.Height - 60;
@@ -482,7 +467,6 @@ namespace Reloj_Windows
                 this.Top = tamAnt.Top;
                 this.Width = tamAnt.Width;
                 this.Height = tamAnt.Height;
-
             }
 
             salvaPantallaActivo = false;
@@ -533,8 +517,12 @@ namespace Reloj_Windows
             mnu08RecordarPosicion.Checked = MySettings.RecordarPos;
             mnu09TopMost.Checked = MySettings.SiempreEncima;
             mnu04AcoplarTransparente.Checked = MySettings.AcoplarTransparente;
+            mnu06TamañoPequeño.Checked = MySettings.TamañoPequeño;
 
             AcoplarVentana(acoplarDonde);
+            
+            if(MySettings.TamañoPequeño)
+                PonerTamañoAcoplar(true);
 
             LabelInfo.ToolTipText = $"Activo desde {ActivoDesde:HH:mm:ss dd.MMMyyyy}";
             btnSplitDrop.ToolTipText = $"{this.Location} {this.Size}".Replace("X", "L").Replace("Y", "T");
@@ -798,6 +786,7 @@ namespace Reloj_Windows
                 inicializando = false;
             }
             ((ToolStripMenuItem)notifyContextMenu.Items[mnu.Name]).Checked = mnu.Checked;
+            MySettings.TamañoPequeño = mnu.Checked;
         }
 
         private void MnuAcercaDe_Click(object sender, EventArgs e)
