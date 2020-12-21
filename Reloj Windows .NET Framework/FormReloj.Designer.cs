@@ -1,7 +1,7 @@
 ﻿
 namespace Reloj_Windows
 {
-    partial class FormReloj48
+    partial class FormReloj
     {
         /// <summary>
         ///  Required designer variable.
@@ -30,7 +30,7 @@ namespace Reloj_Windows
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReloj48));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormReloj));
             this.panelCentro = new System.Windows.Forms.Panel();
             this.labelHora = new System.Windows.Forms.Label();
             this.labelFecha = new System.Windows.Forms.Label();

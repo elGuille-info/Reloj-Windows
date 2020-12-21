@@ -16,7 +16,7 @@ namespace Reloj_Windows
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormReloj48());
+            Application.Run(new FormReloj());
         }
     }
 }

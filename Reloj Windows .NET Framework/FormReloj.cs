@@ -19,7 +19,7 @@ using System.Windows.Forms;
 
 namespace Reloj_Windows
 {
-    public partial class FormReloj48 : Form
+    public partial class FormReloj : Form
     {
         private readonly System.Reflection.Assembly ensamblado;
         private readonly FileVersionInfo fvi;
@@ -95,7 +95,7 @@ namespace Reloj_Windows
         /// </summary>
         private bool salvaPantallaActivo;
 
-        public FormReloj48()
+        public FormReloj()
         {
             inicializando = true;
 
