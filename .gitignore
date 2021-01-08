@@ -6,6 +6,11 @@
 **/.vs
 **/bin
 **/obj
+*.lnk
+*.zip
+*.snk
+encrypted-string*.txt
+client_secret*.json
 
 # User-specific files
 *.rsuser
